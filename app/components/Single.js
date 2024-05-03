@@ -10,6 +10,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import SavingInterest from "./SavingInterest";
 
 const DATA = [
   {
@@ -51,7 +52,7 @@ const Page = ({ title }) => {
   return (
     <View className="flex-1 overflow-hidden">
       <SafeAreaView />
-      <View className="relative">
+      <View className="relative mb-20">
         <View className="bg-slate-800 p-20 items-center">
           <Text className="text-white text-3xl max-w-[200px] text-center">
             Your Agalyawam {title}
@@ -65,8 +66,9 @@ const Page = ({ title }) => {
           </View>
         </View>
       </View>
+      <SavingInterest />
       {/* <Link href="/">Home</Link> */}
-      <View className="mx-5 flex-1 mt-16">
+      <View className="mx-5 flex-1">
         <Text className="text-2xl">Previous {title}</Text>
         <Text>Today, May 4</Text>
         <FlatList
