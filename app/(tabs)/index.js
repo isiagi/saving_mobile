@@ -1,7 +1,17 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, router } from "expo-router";
-import { Text, View, Image, FlatList, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import {
+  Text,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  Pressable,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import HomeModal from "../components/ui/homeModal/HomeModal";
 
 const DATA = [
   {
@@ -40,21 +50,24 @@ const Item = ({ title }) => (
 );
 
 export default function Page() {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <View className="flex-1">
       <SafeAreaView>
         <View>
-          <View className="flex-row items-center p-4 gap-2">
-            <Image
-              style={{ width: 40, height: 40 }}
-              source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
-            />
+          <Pressable onPress={() => setModalVisible(!modalVisible)}>
+            <View className="flex-row items-center p-4 gap-2">
+              <Image
+                style={{ width: 40, height: 40 }}
+                source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
+              />
 
-            <View className="flex-col">
-              <Text>Welcome Back!</Text>
-              <Text className="text-lg font-bold">Geofrey Isiagi</Text>
+              <View className="flex-col">
+                <Text>Welcome Back!</Text>
+                <Text className="text-lg font-bold">Geofrey Isiagi</Text>
+              </View>
             </View>
-          </View>
+          </Pressable>
           <View className=" mx-5 bg-black p-7 gap-7">
             <Text className=" text-white">Current Saving Balance</Text>
             <Text className="text-3xl text-white font-bold">300000 shs</Text>
@@ -76,6 +89,10 @@ export default function Page() {
           horizontal
         />
       </View>
+      <HomeModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
       <View className="mx-5 flex-1">
         <Text className="text-2xl">Previous Savings</Text>
         <Text>Today, May 4</Text>
