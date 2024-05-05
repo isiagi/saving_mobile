@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Bottom from "../../components/ui/bottomSheet/BottomSheet";
 
-export class transaction extends Component {
+export class Page extends Component {
   render() {
     return (
       <View className="flex-1 bg-slate-800">
@@ -15,4 +15,4 @@ export class transaction extends Component {
   }
 }
 
-export default transaction;
+export default Page;

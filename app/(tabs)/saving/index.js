@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 import React from "react";
-import Page from "../../components/Single";
+import PageComponent from "../../components/Single";
 
-const index = () => {
-  return <Page title={"Savings"} />;
+const Page = () => {
+  return <PageComponent title={"Savings"} />;
 };
 
-export default index;
+export default Page;
