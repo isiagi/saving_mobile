@@ -1,15 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+// import { SafeAreaView } from "react-native-safe-area-context";
 
-import SavingInterest from "./SavingInterest";
+// import SavingInterest from "./SavingInterest";
 import Bottom from "./ui/bottomSheet/BottomSheet";
 import { router } from "expo-router";
 
 const Page = ({ title }) => {
   return (
     <View className="flex-1 overflow-hidden">
-      <SafeAreaView />
       <View className="relative mb-20">
         <View className="bg-slate-800 p-20 items-center">
           <Text className="text-white text-3xl max-w-[200px] text-center">
@@ -24,7 +23,7 @@ const Page = ({ title }) => {
           </View>
         </View>
       </View>
-      <SavingInterest />
+      {/* <SavingInterest /> */}
 
       {/* <Link href="/">Home</Link> */}
       <View className="mx-5 flex-row justify-between items-center">
