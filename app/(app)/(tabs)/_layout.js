@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
+import { AuthContext } from "../../store/ctx";
 
 export default function TabLayout() {
+  const authCtx = useContext(AuthContext);
+
+  if (!authCtx.isAuthenticated) return <Redirect href="/(app)/sign-in" />;
+
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: "blue", headerShown: false }}>
       <Tabs.Screen

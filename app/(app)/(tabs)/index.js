@@ -11,7 +11,7 @@ import {
   Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import HomeModal from "../components/ui/homeModal/HomeModal";
+import HomeModal from "../../components/ui/homeModal/HomeModal";
 
 const DATA = [
   {
