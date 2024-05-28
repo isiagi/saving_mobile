@@ -7,7 +7,9 @@ export default function Layout() {
       <Stack.Screen
         name="index"
         options={{
-          headerLeft: () => <Button title="Get Loan" />,
+          headerLeft: () => (
+            <Button className="bg-red-500" title="Get Loan, make big" />
+          ),
           title: "Loans",
           headerTitleAlign: "center",
           headerRight: () => (

@@ -15,6 +15,8 @@ export default function AppLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen name="member" options={{ headerTitle: "Login" }} />
+      <Stack.Screen name="set-password" options={{ headerTitle: "Back" }} />
     </Stack>
   );
 }

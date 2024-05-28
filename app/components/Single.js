@@ -12,13 +12,15 @@ const Page = ({ title }) => {
       <View className="relative mb-20">
         <View className="bg-slate-800 p-20 items-center">
           <Text className="text-white text-3xl max-w-[200px] text-center">
-            Your Agalyawam {title}
+            Your Agalyawamu {title}
           </Text>
         </View>
+        {/* TODO */}
+        {/* center balance, border-radius */}
 
-        <View className="bg-red-400 w-full overflow-hidden p-7 mx-5 absolute -bottom-[calc(100%/4)]">
+        <View className="bg-red-400 w-[500px] overflow-hidden p-7 mx-5 absolute -bottom-[calc(100%/4)] border-r-[10px]">
           <View>
-            <Text>Account Balance</Text>
+            <Text>Loan Balance</Text>
             <Text>300,000</Text>
           </View>
         </View>
@@ -28,7 +30,7 @@ const Page = ({ title }) => {
       {/* <Link href="/">Home</Link> */}
       <View className="mx-5 flex-row justify-between items-center">
         <View>
-          <Text className="text-2xl">Previous {title}</Text>
+          <Text className="text-2xl">Previous {title} Payments</Text>
           <Text>Today, May 4</Text>
         </View>
         <View>

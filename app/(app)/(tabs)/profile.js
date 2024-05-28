@@ -1,11 +1,13 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { AuthContext } from "../../store/ctx";
 
 const Page = () => {
+  const authCtx = useContext(AuthContext);
   return (
-    <View className="flex flex-1 bg-red-400">
+    <View className="flex flex-1 bg-blue-500">
       <SafeAreaView />
       <View className="items-center py-10">
         <View className="text-center">
@@ -13,7 +15,7 @@ const Page = () => {
             style={{ width: 100, height: 100, borderRadius: 50 }}
             source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
           />
-          <Text>Geofrey Isiagi</Text>
+          <Text className="text-white text-4xl">Geofrey Isiagi</Text>
         </View>
       </View>
 
@@ -25,12 +27,22 @@ const Page = () => {
           </View>
 
           <View className="flex-row justify-between py-4">
+            <Text>NIN: </Text>
+            <Text>3VvYh@example.com</Text>
+          </View>
+
+          <View className="flex-row justify-between py-4">
             <Text>Email: </Text>
             <Text>3VvYh@example.com</Text>
           </View>
 
           <View className="flex-row justify-between py-4">
-            <Text>Date Of Birth: </Text>
+            <Text>Place of Residence: </Text>
+            <Text>3VvYh@example.com</Text>
+          </View>
+
+          <View className="flex-row justify-between py-4">
+            <Text>Occupation: </Text>
             <Text>3VvYh@example.com</Text>
           </View>
 
@@ -44,8 +56,8 @@ const Page = () => {
             <Text>3VvYh@example.com</Text>
           </View>
 
-          <Pressable>
-            <View className="flex-row justify-center mt-10 py-4 bg-red-400">
+          <Pressable onPress={authCtx.logout}>
+            <View className="flex-row justify-center mt-10 py-4 bg-blue-500">
               <Text className="text-center text-xl text-white">Log Out</Text>
             </View>
           </Pressable>

@@ -16,20 +16,20 @@ import HomeModal from "../../components/ui/homeModal/HomeModal";
 const DATA = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
+    title: "Loan Balance",
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
+    title: "Wagumbumbuzi",
   },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91ab97f63",
-    title: "Second Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a9f8-fbd91ab97f63",
-    title: "Second Item",
-  },
+  // {
+  //   id: "3ac68afc-c605-48d3-a4f8-fbd91ab97f63",
+  //   title: "Second Item",
+  // },
+  // {
+  //   id: "3ac68afc-c605-48d3-a9f8-fbd91ab97f63",
+  //   title: "Second Item",
+  // },
 ];
 
 const Item = ({ title }) => (
@@ -74,7 +74,10 @@ export default function Page() {
           </View>
         </View>
       </SafeAreaView>
-      <View className="px-5 my-10">
+      <View>
+        <Text>Graph</Text>
+      </View>
+      {/* <View className="px-5 my-10">
         <FlatList
           data={DATA}
           renderItem={({ item }) => (
@@ -88,11 +91,14 @@ export default function Page() {
           keyExtractor={(item) => item.id}
           horizontal
         />
-      </View>
+      </View> */}
       <HomeModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
+      <View className="bg-slate-500">
+        <Text>Apply For Loan</Text>
+      </View>
       <View className="mx-5 flex-1">
         <Text className="text-2xl">Previous Savings</Text>
         <Text>Today, May 4</Text>

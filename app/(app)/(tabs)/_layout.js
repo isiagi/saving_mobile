@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Redirect, Tabs } from "expo-router";
 import { AuthContext } from "../../store/ctx";
