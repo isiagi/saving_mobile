@@ -38,26 +38,26 @@ const DATA = [
 const Item = ({ title }) => (
   <View
     style={styles.shadow}
-    className="p-5 mt-5 flex-row items-center gap-4 justify-between"
+    className="p-5 mt-6 mx-5 flex-row items-center gap-4 justify-between"
   >
     <View className="flex-row items-center gap-4">
-      <View className="bg-[#2E3E52] w-10 h-10 rounded-full justify-center items-center">
+      <View className="bg-white w-10 h-10 rounded-full justify-center items-center">
         <FontAwesome size={24} name="dollar" color={"#D18A0D"} />
       </View>
       <View>
-        <Text className="text-xl text-[#0D68D1]">{title}</Text>
-        <Text className="text-[#2E3E52]">23:15pm</Text>
+        <Text className="text-xl text-[#fff]">{title}</Text>
+        <Text className="text-[#d3d3d3]">23:15pm</Text>
       </View>
     </View>
 
     <View>
-      <Text className="text-xl text-[#0D68D1]">Amount</Text>
-      <Text className="text-[#2E3E52]">400,000</Text>
+      <Text className="text-xl text-[#fff]">Amount</Text>
+      <Text className="text-[#d3d3d3]">400,000</Text>
     </View>
   </View>
 );
 
-const Bottom = () => {
+const TransactionSheet = () => {
   // ref
   const bottomSheetModalRef = useRef();
 
@@ -83,7 +83,7 @@ const Bottom = () => {
             title="Present Modal"
             color="black"
           /> */}
-          <View className="mx-5">
+          <View className="">
             <FlatList
               data={DATA}
               renderItem={({ item }) => (
@@ -115,8 +115,6 @@ const Bottom = () => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    backgroundColor: "#fff",
     flex: 1,
   },
   contentContainer: {
@@ -124,16 +122,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   shadow: {
-    backgroundColor: "white",
-    shadowColor: "grey",
+    backgroundColor: "#2D5C91",
+    shadowColor: "#eee",
     shadowOffset: {
       width: 0,
       height: 10,
     },
     shadowOpacity: 0.4,
     shadowRadius: 4,
-    elevation: 2,
+    elevation: 3,
   },
 });
 
-export default Bottom;
+export default TransactionSheet;

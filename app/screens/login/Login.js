@@ -59,7 +59,7 @@ const Login = () => {
 
       <View className="mt-8">
         <TextInput
-          className="border-[1px] py-4 px-2 mb-7"
+          className="border-[1px] py-4 px-2 mb-7 text-xl"
           style={""}
           onChangeText={onChangeText}
           value={text}
@@ -67,7 +67,7 @@ const Login = () => {
         />
         <View className="mb-7">
           <TextInput
-            className="border-[1px] py-4 px-2"
+            className="border-[1px] py-4 px-2 text-xl"
             onChangeText={onPassword}
             value={password}
             placeholder="Password"

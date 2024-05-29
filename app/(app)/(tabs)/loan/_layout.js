@@ -8,20 +8,24 @@ export default function Layout() {
         name="index"
         options={{
           headerLeft: () => (
-            <Button className="bg-red-500" title="Get Loan, make big" />
+            <Button color={"#D18A0D"} className="p-10" title="Get Loan" />
           ),
-          title: "Loans",
+          title: "LOANS",
           headerTitleAlign: "center",
+          headerTintColor: "#0D68D1",
           headerRight: () => (
             <Pressable>
-              <Text>Log Out</Text>
+              <Text className="text-[#D18A0D] font-semibold">Log Out</Text>
             </Pressable>
           ),
         }}
       />
       <Stack.Screen
         name="transaction"
-        options={{ headerTitle: "All Transactions" }}
+        options={{
+          headerTitle: "All Transactions",
+          headerTitleAlign: "center",
+        }}
       />
     </Stack>
   );

@@ -7,11 +7,12 @@ export default function Layout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Your Savings",
+          title: "SAVINGS",
           headerTitleAlign: "center",
+          headerTintColor: "#0D68D1",
           headerRight: () => (
             <Pressable>
-              <Text>Log Out</Text>
+              <Text className="text-[#D18A0D] font-semibold">Log Out</Text>
             </Pressable>
           ),
         }}

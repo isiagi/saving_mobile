@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 // import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -8,17 +8,16 @@ import { router } from "expo-router";
 
 const Page = ({ title }) => {
   return (
-    <View className="flex-1 overflow-hidden">
-      <View className="relative mb-20">
-        <View className="bg-slate-800 p-20 items-center">
+    <View className="flex-1 overflow-hidden bg-[#2D5C91]">
+      <StatusBar barStyle={"dark-content"} />
+      <View className=" mb-10 flex">
+        <View className=" py-12 items-center">
           <Text className="text-white text-3xl max-w-[200px] text-center">
-            Your Agalyawamu {title}
+            Your {title}
           </Text>
         </View>
-        {/* TODO */}
-        {/* center balance, border-radius */}
 
-        <View className="bg-red-400 w-[500px] overflow-hidden p-7 mx-5 absolute -bottom-[calc(100%/4)] border-r-[10px]">
+        <View className="bg-[#D18A0D] self-center p-7 overflow-hidden w-[80%] mx-auto my-0 rounded-xl">
           <View>
             <Text>Loan Balance</Text>
             <Text>300,000</Text>
@@ -28,9 +27,11 @@ const Page = ({ title }) => {
       {/* <SavingInterest /> */}
 
       {/* <Link href="/">Home</Link> */}
-      <View className="mx-5 flex-row justify-between items-center">
+      <View className="px-5 py-7 flex-row justify-between items-center bg-white rounded-tr-[30px] rounded-tl-[30px]">
         <View>
-          <Text className="text-2xl">Previous {title} Payments</Text>
+          <Text className="text-2xl text-[#0D68D1]">
+            Previous {title} Payments
+          </Text>
           <Text>Today, May 4</Text>
         </View>
         <View>
@@ -43,7 +44,7 @@ const Page = ({ title }) => {
               { padding: 6, borderRadius: 4 },
             ]}
           >
-            <Text>View All</Text>
+            <Text className="text-[#D18A0D] font-semibold">View All</Text>
           </Pressable>
         </View>
       </View>
