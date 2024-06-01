@@ -1,12 +1,16 @@
 import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 // import { SafeAreaView } from "react-native-safe-area-context";
 
 // import SavingInterest from "./SavingInterest";
 import Bottom from "./ui/bottomSheet/BottomSheet";
-import { router } from "expo-router";
+import { router, usePathname } from "expo-router";
 
-const Page = ({ title }) => {
+const Page = ({ title, data, isLoading }) => {
+  const tabPath = usePathname();
+
+  const toRoute = tabPath.split("/")[1];
+
   return (
     <View className="flex-1 overflow-hidden bg-[#2D5C91]">
       <StatusBar barStyle={"dark-content"} />
@@ -36,7 +40,7 @@ const Page = ({ title }) => {
         </View>
         <View>
           <Pressable
-            onPress={() => router.navigate("/(tabs)/loan/transaction")}
+            onPress={() => router.navigate(`/(tabs)/${toRoute}/transaction`)}
             style={({ pressed }) => [
               {
                 backgroundColor: pressed ? "red" : "white",
@@ -48,7 +52,7 @@ const Page = ({ title }) => {
           </Pressable>
         </View>
       </View>
-      <Bottom />
+      <Bottom data={data} isLoading={isLoading} />
     </View>
   );
 };

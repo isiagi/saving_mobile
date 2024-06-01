@@ -31,7 +31,7 @@ const Login = () => {
       const response = await login(loginData);
 
       console.log(response.data.Token);
-      authCtx.authenticate(response.data.Token);
+      authCtx.authenticate(response.data.Token, response.data.User.id);
       setPassword("");
       setText("");
       router.navigate("/(app)/");

@@ -1,22 +1,31 @@
 import {
   Image,
   Pressable,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { AuthContext } from "../../store/ctx";
+import { router } from "expo-router";
 
 const Page = () => {
   const authCtx = useContext(AuthContext);
   return (
-    <View className="flex flex-1 bg-[#2D5C91]">
+    <ScrollView className="flex-1 bg-[#2D5C91]">
       <StatusBar barStyle={"light-content"} />
       <SafeAreaView />
+      <TouchableOpacity
+        onPress={() => router.navigate("editProfile")}
+        className="bg-[#D18A0D] w-[100px] py-2 mx-5 rounded-xl self-end"
+      >
+        <Text className="text-center text-xl text-white">Edit Profile</Text>
+      </TouchableOpacity>
       <View className="items-center py-10">
         <View className="text-center items-center">
           <Image
@@ -28,7 +37,7 @@ const Page = () => {
       </View>
 
       <View className="flex-1 bg-white rounded-t-3xl">
-        <View className=" px-5 pt-10">
+        <View className=" px-5 pt-7">
           <View className="flex-row justify-between py-4">
             <Text className="text-[#0D68D1] text-xl font-semibold">
               Membership No. :{" "}
@@ -77,13 +86,13 @@ const Page = () => {
           </View>
 
           <Pressable onPress={authCtx.logout}>
-            <View className="flex-row justify-center mt-10 py-4 bg-[#D18A0D]">
+            <View className="flex-row justify-center mt-10 py-4 bg-[#D18A0D] rounded-xl">
               <Text className="text-center text-xl text-white">Log Out</Text>
             </View>
           </Pressable>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

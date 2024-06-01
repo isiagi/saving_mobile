@@ -16,26 +16,26 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91ab97f63",
-    title: "Second Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a9f8-fbd91ab97f63",
-    title: "Second Item",
-  },
-];
+// const DATA = [
+//   {
+//     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+//     title: "First Item",
+//   },
+//   {
+//     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+//     title: "Second Item",
+//   },
+//   {
+//     id: "3ac68afc-c605-48d3-a4f8-fbd91ab97f63",
+//     title: "Second Item",
+//   },
+//   {
+//     id: "3ac68afc-c605-48d3-a9f8-fbd91ab97f63",
+//     title: "Second Item",
+//   },
+// ];
 
-const Item = ({ title }) => (
+const Item = ({ data }) => (
   <View
     style={styles.shadow}
     className="p-5 mt-6 mx-5 flex-row items-center gap-4 justify-between"
@@ -45,19 +45,19 @@ const Item = ({ title }) => (
         <FontAwesome size={24} name="dollar" color={"#D18A0D"} />
       </View>
       <View>
-        <Text className="text-xl text-[#fff]">{title}</Text>
-        <Text className="text-[#d3d3d3]">23:15pm</Text>
+        <Text className="text-xl text-[#fff]">{data.member_name}</Text>
+        <Text className="text-[#d3d3d3]">{data.date_of_payment}</Text>
       </View>
     </View>
 
     <View>
       <Text className="text-xl text-[#fff]">Amount</Text>
-      <Text className="text-[#d3d3d3]">400,000</Text>
+      <Text className="text-[#d3d3d3]">{data.amount}</Text>
     </View>
   </View>
 );
 
-const TransactionSheet = () => {
+const TransactionSheet = ({ data, isLoading }) => {
   // ref
   const bottomSheetModalRef = useRef();
 
@@ -85,13 +85,13 @@ const TransactionSheet = () => {
           /> */}
           <View className="">
             <FlatList
-              data={DATA}
+              data={data && data}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   className=""
                   onPress={handlePresentModalPress}
                 >
-                  <Item title={item.title} />
+                  <Item data={item} />
                 </TouchableOpacity>
               )}
               keyExtractor={(item) => item.id}

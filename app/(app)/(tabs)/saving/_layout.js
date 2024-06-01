@@ -17,6 +17,13 @@ export default function Layout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="transaction"
+        options={{
+          headerTitle: "All Savings Transactions",
+          headerTitleAlign: "center",
+        }}
+      />
     </Stack>
   );
 }
