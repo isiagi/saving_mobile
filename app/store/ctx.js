@@ -39,11 +39,16 @@ const AuthContextProvider = ({ children }) => {
 
   async function logout() {
     try {
+      setIsLoading(true);
       await API.post("auth/logout");
+      setIsLoading(false);
       AsyncStorage.removeItem("authToken");
       setAuthToken(null);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
+      AsyncStorage.removeItem("authToken");
+      setAuthToken(null);
     }
   }
 

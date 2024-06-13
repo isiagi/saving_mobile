@@ -22,6 +22,7 @@ export default function Layout() {
         options={{
           headerTitle: "All Savings Transactions",
           headerTitleAlign: "center",
+          unmountOnBlur: true,
         }}
       />
     </Stack>

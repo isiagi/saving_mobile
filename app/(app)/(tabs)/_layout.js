@@ -10,7 +10,11 @@ export default function TabLayout() {
 
   return (
     <Tabs
-      screenOptions={{ tabBarActiveTintColor: "#D18A0D", headerShown: false }}
+      screenOptions={{
+        tabBarActiveTintColor: "#D18A0D",
+        headerShown: false,
+        unmountOnBlur: true,
+      }}
     >
       <Tabs.Screen
         name="index"
@@ -28,6 +32,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome size={24} name="dollar" color={color} />
           ),
+          unmountOnBlur: true,
         }}
       />
       <Tabs.Screen

@@ -39,7 +39,7 @@ const DATA = [
 const Item = ({ data }) => (
   <View
     style={styles.shadow}
-    className="p-5 mt-5 flex-row items-center gap-4 justify-between"
+    className="p-5 mt-3 flex-row items-center gap-4 justify-between"
   >
     <View className="flex-row items-center gap-4">
       <View className="bg-[#2E3E52] w-10 h-10 rounded-full justify-center items-center">
@@ -74,11 +74,19 @@ const Bottom = ({ data, isLoading }) => {
     console.log("handleSheetChanges", index);
   }, []);
 
-  isLoading && (
-    <View className="justify-center">
-      <ActivityIndicator size={"large"} />
-    </View>
-  );
+  if (isLoading)
+    return (
+      <View className="flex-1 justify-center items-center bg-white">
+        <ActivityIndicator size={"large"} />
+      </View>
+    );
+
+  if (!data)
+    return (
+      <View className="flex-1 justify-center items-center bg-white">
+        <Text>No data</Text>
+      </View>
+    );
 
   // renders
   return (
@@ -122,7 +130,7 @@ const Bottom = ({ data, isLoading }) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    // justifyContent: "center",
     backgroundColor: "#fff",
     flex: 1,
   },

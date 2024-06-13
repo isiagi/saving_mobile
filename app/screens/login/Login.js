@@ -36,7 +36,7 @@ const Login = () => {
       setText("");
       router.navigate("/(app)/");
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       Alert.alert(
         "Authentication Error",
         "Please check credentials Or Contact Admin"

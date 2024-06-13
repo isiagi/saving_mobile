@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import {
   BottomSheetModal,
@@ -58,6 +59,14 @@ const Item = ({ data }) => (
 );
 
 const TransactionSheet = ({ data, isLoading }) => {
+  if (isLoading)
+    return (
+      <View className="flex-1 justify-center items-center bg-white">
+        <ActivityIndicator size={"large"} />
+        <Text>Loading...</Text>
+      </View>
+    );
+
   // ref
   const bottomSheetModalRef = useRef();
 

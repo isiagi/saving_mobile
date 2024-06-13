@@ -1,7 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, router } from "expo-router";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Text,
   View,
@@ -15,6 +15,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import HomeModal from "../../components/ui/homeModal/HomeModal";
 import Chart from "../../components/ui/chart/Chart";
+import { AuthContext } from "../../store/ctx";
+import useGetById from "../../hooks/useGetById";
 
 const DATA = [
   {
@@ -54,6 +56,11 @@ const Item = ({ title }) => (
 
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
+  const { authId } = useContext(AuthContext);
+
+  const [data, isLoading] = useGetById("user_profile/profile", authId);
+
+  const image_url = data[0] && data[0].image_url;
   return (
     <View className="flex-1 bg-white">
       {/* heading */}
@@ -65,13 +72,16 @@ export default function Page() {
               <View className="flex-col">
                 <Text>Welcome Back!</Text>
                 <Text className="text-2xl font-bold mt-2 text-[#0D68D1]">
-                  Geofrey Isiagi
+                  {data[0] && data[0].user.first_name}{" "}
+                  {data[0] && data[0].user.last_name}
                 </Text>
               </View>
 
               <Image
                 style={{ width: 40, height: 40 }}
-                source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
+                source={{
+                  uri: image_url || "https://reactnative.dev/img/tiny_logo.png",
+                }}
               />
             </View>
           </Pressable>

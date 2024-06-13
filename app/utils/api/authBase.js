@@ -4,6 +4,8 @@ import API from "./base";
 API.interceptors.request.use(async (config) => {
   const token = await AsyncStorage.getItem("authToken");
   console.log("tokenz", token);
+  config.headers["Content-Type"] =
+    "multipart/form-data; boundary=----WebKitFormBoundaryqTqJIxvkWFYqvP5s";
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
   }
