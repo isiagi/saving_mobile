@@ -17,6 +17,9 @@ import HomeModal from "../../components/ui/homeModal/HomeModal";
 import Chart from "../../components/ui/chart/Chart";
 import { AuthContext } from "../../store/ctx";
 import useGetById from "../../hooks/useGetById";
+import { DataContext } from "../../store/dataCtx";
+import useFetchMultiple from "../../hooks/useFetchHome";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const DATA = [
   {
@@ -57,8 +60,29 @@ const Item = ({ title }) => (
 export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
   const { authId } = useContext(AuthContext);
+  const { raiseData, setLoading } = useContext(DataContext);
 
-  const [data, isLoading] = useGetById("user_profile/profile", authId);
+  // const [data, isLoading] = useGetById("user_profile/profile", authId);
+  const url = [{ url: `user_profile/profile/${authId}` }, { url: "saving" }];
+
+  // raiseData(data);
+  // setLoading(isLoading);
+
+  const [dataz, isLoading, error] = useFetchMultiple(url);
+
+  setLoading(isLoading);
+  if (isLoading) {
+    return (
+      <Spinner
+        visible={isLoading}
+        textContent={"Loading..."}
+        textStyle={{ color: "#FFF" }}
+      />
+    );
+  }
+
+  const data = dataz[0];
+  raiseData(data);
 
   const image_url = data[0] && data[0].image_url;
   return (
@@ -71,7 +95,7 @@ export default function Page() {
             <View className="flex-row justify-between items-center p-4 gap-2">
               <View className="flex-col">
                 <Text>Welcome Back!</Text>
-                <Text className="text-2xl font-bold mt-2 text-[#0D68D1]">
+                <Text className="text-2xl font-bold mt-2 text-[#374928]">
                   {data[0] && data[0].user.first_name}{" "}
                   {data[0] && data[0].user.last_name}
                 </Text>
@@ -85,7 +109,7 @@ export default function Page() {
               />
             </View>
           </Pressable>
-          <View className=" mx-5 bg-[#0D68D1] p-7 gap-7 rounded-xl flex-row justify-between items-center">
+          <View className=" mx-5 bg-[#365E32] p-7 gap-7 rounded-xl flex-row justify-between items-center">
             <View>
               <Text className=" text-white">Current Saving Balance</Text>
               <Text className="text-3xl text-white font-bold mt-7">
@@ -101,10 +125,12 @@ export default function Page() {
       {/* chart */}
       <View className="mx-5 my-5 ">
         <View className="flex-row justify-between">
-          <Text className="text-2xl font-medium pb-3 text-[#0D68D1]">
+          <Text className="text-2xl font-medium pb-3 text-[#365E32]">
             Last Month Saving
           </Text>
-          <Text className="text-lg pb-3 text-[#D18A0D]">View Savings</Text>
+          <Text className="text-lg pb-3 text-[#E7D37F] font-bold">
+            View Savings
+          </Text>
         </View>
         <Chart />
       </View>
@@ -130,17 +156,19 @@ export default function Page() {
         setModalVisible={setModalVisible}
       />
       {/* Loan */}
-      <View className="bg-[#0D68D1] mx-5 py-5 gap-5 rounded-xl">
-        <View className="flex-row gap-10 items-center mx-7">
-          <FontAwesome size={28} name="money" color={"#fff"} />
+      <View className="bg-[#365E32] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg">
+        <View className="flex-row gap-7 items-center mx-7">
+          <FontAwesome size={38} name="money" color={"#fff"} />
           <View>
             <Text className="text-2xl text-white">Get A Loan</Text>
             <Text className="text-white">Today, May 4</Text>
           </View>
         </View>
         <View className="mx-5">
-          <TouchableOpacity className="bg-[#D18A0D] p-5 mx-2">
-            <Text className="text-center text-white">Apply For Loan</Text>
+          <TouchableOpacity className="bg-[#E7D37F] p-5 mx-2 rounded-sm">
+            <Text className="text-center text-[#81A263] text-xl">
+              Apply For Loan
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

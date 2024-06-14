@@ -61,7 +61,7 @@ const Item = ({ data }) => (
 const TransactionSheet = ({ data, isLoading }) => {
   if (isLoading)
     return (
-      <View className="flex-1 justify-center items-center bg-white">
+      <View className="flex-1 justify-center items-center bg-[#2D5C91]">
         <ActivityIndicator size={"large"} />
         <Text>Loading...</Text>
       </View>

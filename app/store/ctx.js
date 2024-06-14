@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useEffect, useState } from "react";
 import API from "../utils/api/authBase";
 import { ActivityIndicator, Text, View } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export const AuthContext = createContext({
   token: "",
@@ -62,9 +63,11 @@ const AuthContextProvider = ({ children }) => {
 
   if (isLoading) {
     return (
-      <View className="flex-1 justify-center">
-        <ActivityIndicator size={"large"} />
-      </View>
+      <Spinner
+        visible={isLoading}
+        textContent={"Loading App..."}
+        textStyle={{ color: "#FFF" }}
+      />
     ); // or a loading spinner/indicator
   }
 

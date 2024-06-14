@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Redirect, Tabs } from "expo-router";
 import { AuthContext } from "../../store/ctx";
+import { Text, TouchableOpacity } from "react-native";
 
 export default function TabLayout() {
   const authCtx = useContext(AuthContext);
@@ -11,7 +12,14 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#D18A0D",
+        tabBarActiveTintColor: "#E7D37F",
+        tabBarIconStyle: {
+          backgroundColor: "#9E6623",
+        },
+        tabBarInactiveTintColor: "#81A263",
+        tabBarStyle: {
+          backgroundColor: "#365E32",
+        },
         headerShown: false,
         unmountOnBlur: true,
       }}
@@ -20,6 +28,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+
           tabBarIcon: ({ color }) => (
             <FontAwesome size={24} name="home" color={color} />
           ),
@@ -58,6 +67,11 @@ export default function TabLayout() {
         options={{
           title: "Edit Profile",
           href: null,
+          headerRight: () => (
+            <TouchableOpacity>
+              <Text>Cancel</Text>
+            </TouchableOpacity>
+          ),
         }}
       />
     </Tabs>

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -64,11 +64,16 @@ const Bottom = ({ data, isLoading }) => {
 
   // variables
   const snapPoints = useMemo(() => [200, 400], []);
+  const [modalData, setModalData] = useState({});
 
   // callbacks
-  const handlePresentModalPress = useCallback(() => {
+  const handlePresentModalPress = useCallback((item) => {
     // useModalStore.getState().openModal(); // Call the openModal function from the store
+    console.log("====================================");
+    console.log(item);
+    console.log("====================================");
     bottomSheetModalRef.current.present();
+    setModalData(item);
   }, []);
   const handleSheetChanges = useCallback((index) => {
     console.log("handleSheetChanges", index);
@@ -104,7 +109,7 @@ const Bottom = ({ data, isLoading }) => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   className=""
-                  onPress={handlePresentModalPress}
+                  onPress={() => handlePresentModalPress(item)}
                 >
                   <Item data={item} />
                 </TouchableOpacity>
@@ -119,6 +124,25 @@ const Bottom = ({ data, isLoading }) => {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
+              <View className="flex-row justify-between">
+                <Text>Membership ID : </Text>
+                <Text>{modalData && modalData.member_id}</Text>
+              </View>
+
+              <View className="flex-row justify-between">
+                <Text>Member Name: </Text>
+                <Text>{modalData && modalData.member_name}</Text>
+              </View>
+
+              <View className="flex-row justify-between">
+                <Text>Amount : </Text>
+                <Text>{modalData && modalData.amount}</Text>
+              </View>
+
+              <View className="flex-row justify-between">
+                <Text>Data of Payment : </Text>
+                <Text>{modalData && modalData.date_of_payment}</Text>
+              </View>
               <Text>Awesome 🎉</Text>
             </BottomSheetView>
           </BottomSheetModal>

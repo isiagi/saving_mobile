@@ -1,4 +1,11 @@
-import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect } from "react";
 // import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -22,9 +29,18 @@ const Page = ({ title, data, isLoading }) => {
         </View>
 
         <View className="bg-[#D18A0D] self-center p-7 overflow-hidden w-[80%] mx-auto my-0 rounded-xl">
-          <View>
-            <Text>Loan Balance</Text>
-            <Text>300,000</Text>
+          <View className="flex-row justify-between items-center">
+            <View>
+              <Text className="text-white text-lg">Loan Balance</Text>
+              <Text className="text-white text-3xl">300,000</Text>
+            </View>
+            <View>
+              {toRoute === "loan" && (
+                <Button className="h-fit" title="Get Loan">
+                  Get Loan
+                </Button>
+              )}
+            </View>
           </View>
         </View>
       </View>

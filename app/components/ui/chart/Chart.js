@@ -54,7 +54,7 @@ const Chart = () => {
           <>
             <Line
               points={points.highTmp}
-              color={"#D18A0D"}
+              color={"#C8FF26"}
               strokeWidth={2}
               animate={{ type: "timing", duration: 300 }}
             />
@@ -65,10 +65,10 @@ const Chart = () => {
         )}
       </CartesianChart>
       <View className="pt-2">
-        <Text className="text-lg text-[#0D68D1]">
+        <Text className="text-lg text-[#374928]">
           Amount : {state.y.highTmp.position.value}
         </Text>
-        <Text className="text-lg text-[#0D68D1]">
+        <Text className="text-lg text-[#374928]">
           Tmp : {state.x.position.value}
         </Text>
       </View>
