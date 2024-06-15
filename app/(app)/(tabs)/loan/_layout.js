@@ -6,7 +6,13 @@ import { Drawer } from "expo-router/drawer";
 export default function Layout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer>
+      <Drawer
+        screenOptions={{
+          drawerActiveBackgroundColor: "#589E23",
+          drawerActiveTintColor: "#fff",
+          drawerInactiveTintColor: "#0F0F0F",
+        }}
+      >
         <Drawer.Screen
           name="index"
           options={{
@@ -21,7 +27,7 @@ export default function Layout() {
             drawerLabel: "Loans",
             headerTitle: "",
             headerTitleAlign: "center",
-            headerTintColor: "#0D68D1",
+            headerTintColor: "#0F0F0F",
             headerLeft: () => (
               <Pressable className="pl-5">
                 <Text className="text-[#589E23] font-bold">GET LOAN</Text>
@@ -36,6 +42,7 @@ export default function Layout() {
             headerTitle: "All Loans Transactions",
             headerTitleAlign: "center",
             drawerLabel: "All Loans Transactions",
+            headerTintColor: "#0F0F0F",
           }}
         />
         <Drawer.Screen
@@ -44,6 +51,7 @@ export default function Layout() {
             headerTitle: "Loan Payments",
             headerTitleAlign: "center",
             drawerLabel: "Loan Payments",
+            headerTintColor: "#0F0F0F",
           }}
         />
       </Drawer>

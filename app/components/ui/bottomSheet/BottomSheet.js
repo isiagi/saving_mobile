@@ -39,7 +39,7 @@ const DATA = [
 const Item = ({ data }) => (
   <View
     style={styles.shadow}
-    className="p-5 mt-3 flex-row items-center gap-4 justify-between rounded-xl"
+    className="p-5 mt-3 flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
   >
     <View className="flex-row items-center gap-4">
       <View className="bg-[#fff] w-10 h-10 rounded-full justify-center items-center">

@@ -39,7 +39,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 const Item = ({ data }) => (
   <View
     style={styles.shadow}
-    className="p-5 mt-6 mx-5 flex-row items-center gap-4 justify-between"
+    className="p-5 mt-6 mx-5 flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
   >
     <View className="flex-row items-center gap-4">
       <View className="bg-white w-10 h-10 rounded-full justify-center items-center">
