@@ -10,21 +10,21 @@ export default function Layout() {
         <Drawer.Screen
           name="index"
           options={{
-            headerLeft: () => (
+            headerRight: () => (
               <TouchableHighlight
                 onPress={() => router.push("/(app)/(tabs)/loan/payment")}
-                className="pl-5"
+                className="pr-5"
               >
-                <Text className="text-[#D18A0D] font-bold">Loan Payments</Text>
+                <Text className="text-[#589E23] font-bold">Loan Payments</Text>
               </TouchableHighlight>
             ),
             drawerLabel: "Loans",
             headerTitle: "",
             headerTitleAlign: "center",
             headerTintColor: "#0D68D1",
-            headerRight: () => (
-              <Pressable className="pr-5">
-                <Text className="text-[#D18A0D] font-bold">Log Out</Text>
+            headerLeft: () => (
+              <Pressable className="pl-5">
+                <Text className="text-[#589E23] font-bold">GET LOAN</Text>
               </Pressable>
             ),
             unmountOnBlur: true,

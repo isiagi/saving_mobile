@@ -36,23 +36,23 @@ const Page = () => {
   const image_url = data[0] && data[0].image_url;
 
   return (
-    <ScrollView className="flex-1 bg-[#2D5C91]">
-      <StatusBar barStyle={"light-content"} />
+    <ScrollView className="flex-1">
+      <StatusBar backgroundColor={"#fff"} />
       <Spinner
         visible={isLoading}
         textContent={"Loading..."}
         textStyle={{ color: "#FFF" }}
       />
       <SafeAreaView>
-        <View className="flex-row justify-between items-center">
+        <View className="flex-row justify-between items-center mt-5">
           <TouchableOpacity
             onPress={() => router.push("editProfile")}
-            className="bg-[#D18A0D] w-[100px] py-2 mx-5 rounded-xl"
+            className="bg-[#589E23] w-[100px] py-2 mx-5 rounded-xl"
           >
             <Text className="text-center text-xl text-white">Edit Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity className="mr-5">
-            <Text className="text-[#fff] text-xl font-bold">LogOut</Text>
+            <Text className="text-[#589E23] text-xl font-bold">LogOut</Text>
           </TouchableOpacity>
         </View>
         <View className="items-center py-10">
@@ -63,7 +63,7 @@ const Page = () => {
                 uri: image_url || "https://reactnative.dev/img/tiny_logo.png",
               }}
             />
-            <Text className="text-white text-4xl pt-5">
+            <Text className="text-[#0F0F0F] text-4xl pt-5">
               {data[0] && data[0].user.last_name}
             </Text>
           </View>
@@ -72,76 +72,86 @@ const Page = () => {
         <View className="flex-1 bg-white rounded-t-3xl">
           <View className=" px-5 pt-7">
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 Membership No. :{" "}
               </Text>
-              <Text className="text-xl">
+              <Text className="text-xl text-[#708090]">
                 {data[0] && data[0].user.username}
               </Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 First Name :{" "}
               </Text>
-              <Text className="text-xl">
+              <Text className="text-xl text-[#708090]">
                 {data[0] && data[0].user.first_name}
               </Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 Last Name :{" "}
               </Text>
-              <Text className="text-xl">
+              <Text className="text-xl text-[#708090]">
                 {data[0] && data[0].user.last_name}
               </Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 NIN:{" "}
               </Text>
-              <Text className="text-xl">3VvYh@example.com</Text>
+              <Text className="text-xl text-[#708090]">3VvYh@example.com</Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 Email:{" "}
               </Text>
-              <Text className="text-xl">{data[0] && data[0].user.email}</Text>
+              <Text className="text-xl text-[#708090]">
+                {data[0] && data[0].user.email}
+              </Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 Place of Residence:{" "}
               </Text>
-              <Text className="text-xl">{data[0] && data[0].residence}</Text>
+              <Text className="text-xl text-[#708090]">
+                {data[0] && data[0].residence}
+              </Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 Occupation:{" "}
               </Text>
-              <Text className="text-xl">{data[0] && data[0].occupation}</Text>
+              <Text className="text-xl text-[#708090]">
+                {data[0] && data[0].occupation}
+              </Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 Gender:{" "}
               </Text>
-              <Text className="text-xl">{data[0] && data[0].gender}</Text>
+              <Text className="text-xl text-[#708090]">
+                {data[0] && data[0].gender}
+              </Text>
             </View>
 
             <View className="flex-row justify-between py-4">
-              <Text className="text-[#0D68D1] text-xl font-semibold">
+              <Text className="text-[#0F0F0F] text-xl font-semibold">
                 Phone:{" "}
               </Text>
-              <Text className="text-xl">{data[0] && data[0].telephone}</Text>
+              <Text className="text-xl text-[#708090]">
+                {data[0] && data[0].telephone}
+              </Text>
             </View>
 
             <Pressable onPress={authCtx.logout}>
-              <View className="flex-row items-center justify-center mt-10 mb-10 py-4 bg-[#D18A0D] rounded-xl">
+              <View className="flex-row items-center justify-center mt-10 mb-10 py-4 bg-[#589E23] rounded-xl">
                 {isLoading && (
                   <View>
                     <ActivityIndicator size={"small"} />

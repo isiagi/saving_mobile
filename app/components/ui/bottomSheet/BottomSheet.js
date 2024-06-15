@@ -42,18 +42,18 @@ const Item = ({ data }) => (
     className="p-5 mt-3 flex-row items-center gap-4 justify-between"
   >
     <View className="flex-row items-center gap-4">
-      <View className="bg-[#2E3E52] w-10 h-10 rounded-full justify-center items-center">
-        <FontAwesome size={24} name="dollar" color={"#D18A0D"} />
+      <View className="bg-[#fff] w-10 h-10 rounded-full justify-center items-center">
+        <FontAwesome size={24} name="money" color={"#589E23"} />
       </View>
       <View>
-        <Text className="text-xl text-[#0D68D1]">{data.member_name}</Text>
-        <Text className="text-[#2E3E52]">{data.date_of_payment}</Text>
+        <Text className="text-2xl text-[#fff]">{data.member_name}</Text>
+        <Text className="text-[#fff] text-lg pt-1">{data.date_of_payment}</Text>
       </View>
     </View>
 
     <View>
-      <Text className="text-xl text-[#0D68D1]">Amount</Text>
-      <Text className="text-[#2E3E52]">{data.amount}</Text>
+      <Text className="text-xl text-[#fff]">Amount</Text>
+      <Text className="text-[#fff] text-xl pt-1">{data.amount}</Text>
     </View>
   </View>
 );
@@ -124,24 +124,34 @@ const Bottom = ({ data, isLoading }) => {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <View className="flex-row justify-between">
-                <Text>Membership ID : </Text>
-                <Text>{modalData && modalData.member_id}</Text>
+              <View className="flex-row justify-between pt-4">
+                <Text className="text-lg text-[#0F0F0F]">Membership ID : </Text>
+                <Text className="text-lg text-[#708090]">
+                  {modalData && modalData.member_id}
+                </Text>
               </View>
 
-              <View className="flex-row justify-between">
-                <Text>Member Name: </Text>
-                <Text>{modalData && modalData.member_name}</Text>
+              <View className="flex-row justify-between py-4">
+                <Text className="text-lg text-[#0F0F0F]">Member Name: </Text>
+                <Text className="text-lg text-[#708090]">
+                  {modalData && modalData.member_name}
+                </Text>
               </View>
 
-              <View className="flex-row justify-between">
-                <Text>Amount : </Text>
-                <Text>{modalData && modalData.amount}</Text>
+              <View className="flex-row justify-between pb-4">
+                <Text className="text-lg text-[#0F0F0F]">Amount : </Text>
+                <Text className="text-lg text-[#708090]">
+                  {modalData && modalData.amount}
+                </Text>
               </View>
 
-              <View className="flex-row justify-between">
-                <Text>Data of Payment : </Text>
-                <Text>{modalData && modalData.date_of_payment}</Text>
+              <View className="flex-row justify-between pb-4">
+                <Text className="text-lg text-[#0F0F0F]">
+                  Data of Payment :{" "}
+                </Text>
+                <Text className="text-lg text-[#708090]">
+                  {modalData && modalData.date_of_payment}
+                </Text>
               </View>
               <Text>Awesome 🎉</Text>
             </BottomSheetView>
@@ -163,15 +173,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   shadow: {
-    backgroundColor: "white",
-    shadowColor: "grey",
+    backgroundColor: "#589E23",
+    shadowColor: "#fff",
     shadowOffset: {
       width: 0,
       height: 10,
     },
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.5,
     shadowRadius: 4,
-    elevation: 2,
+    elevation: 5,
   },
 });
 

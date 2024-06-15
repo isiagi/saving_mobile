@@ -9,11 +9,11 @@ const TransactionUi = ({ path }) => {
   const [data, isLoading] = useFetch(path);
 
   return (
-    <View className="flex-1 bg-[#2D5C91]">
+    <View className="flex-1">
       <StatusBar barStyle={"dark-content"} />
 
       <View className="flex-1">
-        <Text className="mx-5 text-white font-semibold pt-5">
+        <Text className="mx-5 text-[#708090] font-semibold pt-5">
           Most Recent Transaction
         </Text>
         <TransactionSheet data={data} isLoading={isLoading} />

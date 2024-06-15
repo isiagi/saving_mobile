@@ -9,10 +9,10 @@ export default function Layout() {
         options={{
           title: "SAVINGS",
           headerTitleAlign: "center",
-          headerTintColor: "#0D68D1",
+          headerTintColor: "#0F0F0F",
           headerRight: () => (
             <Pressable>
-              <Text className="text-[#D18A0D] font-semibold">Log Out</Text>
+              <Text className="text-[#589E23] font-bold">Log Out</Text>
             </Pressable>
           ),
         }}

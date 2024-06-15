@@ -61,7 +61,7 @@ const Item = ({ data }) => (
 const TransactionSheet = ({ data, isLoading }) => {
   if (isLoading)
     return (
-      <View className="flex-1 justify-center items-center bg-[#2D5C91]">
+      <View className="flex-1 justify-center items-center">
         <ActivityIndicator size={"large"} />
         <Text>Loading...</Text>
       </View>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   shadow: {
-    backgroundColor: "#2D5C91",
+    backgroundColor: "#589E23",
     shadowColor: "#eee",
     shadowOffset: {
       width: 0,

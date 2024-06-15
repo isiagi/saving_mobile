@@ -86,19 +86,21 @@ export default function Page() {
 
   const image_url = data[0] && data[0].image_url;
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1">
       {/* heading */}
       <SafeAreaView>
         <StatusBar barStyle={"dark-content"} />
         <View>
           <Pressable onPress={() => setModalVisible(!modalVisible)}>
             <View className="flex-row justify-between items-center p-4 gap-2">
-              <View className="flex-col">
-                <Text>Welcome Back!</Text>
-                <Text className="text-2xl font-bold mt-2 text-[#374928]">
-                  {data[0] && data[0].user.first_name}{" "}
-                  {data[0] && data[0].user.last_name}
-                </Text>
+              <View>
+                <View className="flex-row items-center justify-center gap-2">
+                  <Text className="text-2xl">Hello</Text>
+                  <Text className="text-3xl font-bold  text-[#0F0F0F]">
+                    {data[0] && data[0].user.last_name}
+                  </Text>
+                </View>
+                <Text className="text-[#708090]">Have a nice day!</Text>
               </View>
 
               <Image
@@ -109,26 +111,28 @@ export default function Page() {
               />
             </View>
           </Pressable>
-          <View className=" mx-5 bg-[#365E32] p-7 gap-7 rounded-xl flex-row justify-between items-center">
+          <View className=" mx-5 bg-[#fff] p-5 gap-7 rounded-xl flex-row justify-between items-center">
             <View>
-              <Text className=" text-white">Current Saving Balance</Text>
-              <Text className="text-3xl text-white font-bold mt-7">
+              <Text className=" text-[#0F0F0F] text-lg">
+                Current Saving Balance
+              </Text>
+              <Text className="text-3xl text-[#589E23] font-bold mt-3">
                 300000 shs
               </Text>
             </View>
             <View>
-              <FontAwesome size={36} name="dollar" color={"#fff"} />
+              <FontAwesome size={36} name="money" color={"#589E23"} />
             </View>
           </View>
         </View>
       </SafeAreaView>
       {/* chart */}
-      <View className="mx-5 my-5 ">
-        <View className="flex-row justify-between">
-          <Text className="text-2xl font-medium pb-3 text-[#365E32]">
+      <View className="mx-5 my-7 ">
+        <View className="flex-row justify-between mb-2">
+          <Text className="text-2xl font-medium pb-3 text-[#0F0F0F]">
             Last Month Saving
           </Text>
-          <Text className="text-lg pb-3 text-[#E7D37F] font-bold">
+          <Text className="text-lg pb-3 text-[#589E23] font-bold">
             View Savings
           </Text>
         </View>
@@ -156,17 +160,17 @@ export default function Page() {
         setModalVisible={setModalVisible}
       />
       {/* Loan */}
-      <View className="bg-[#365E32] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg">
+      <View className="bg-[#fff] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg">
         <View className="flex-row gap-7 items-center mx-7">
-          <FontAwesome size={38} name="money" color={"#fff"} />
+          <FontAwesome size={38} name="money" color={"#589E23"} />
           <View>
-            <Text className="text-2xl text-white">Get A Loan</Text>
-            <Text className="text-white">Today, May 4</Text>
+            <Text className="text-2xl text-[#0F0F0F]">Get A Loan</Text>
+            <Text className="text-[#0F0F0F]">Today, May 4</Text>
           </View>
         </View>
         <View className="mx-5">
-          <TouchableOpacity className="bg-[#E7D37F] p-5 mx-2 rounded-sm">
-            <Text className="text-center text-[#81A263] text-xl">
+          <TouchableOpacity className="bg-[#589E23] p-5 mx-2 rounded-sm">
+            <Text className="text-center text-[#fff] font-semibold text-xl">
               Apply For Loan
             </Text>
           </TouchableOpacity>

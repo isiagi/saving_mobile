@@ -106,27 +106,33 @@ const Page = () => {
   };
 
   return (
-    <ScrollView className="flex-1 px-5 bg-white">
-      <StatusBar />
+    <ScrollView className="flex-1 px-5">
+      <StatusBar backgroundColor={"#fff"} />
       <SafeAreaView />
       <SafeAreaView>
-        <View className="flex-row justify-between items-center mt-16 mb-4">
-          <Text className="text-2xl font-medium">Edit Profile</Text>
+        <View className="flex-row justify-between items-center mt-24 mb-7">
+          <Text className="text-2xl font-medium text-[#0F0F0F]">
+            Edit Profile
+          </Text>
 
           <View>
             <TouchableOpacity
               onPress={() => router.replace("/(app)/(tabs)/profile")}
             >
-              <Text>Cancel</Text>
+              <Text className="text-[#589E23] font-bold">Cancel</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View className="mb-7">
-          <Text aria-label="Label for firstName" nativeID="first_name">
+          <Text
+            className="text-[#708090] mb-2"
+            aria-label="Label for firstName"
+            nativeID="first_name"
+          >
             First Name
           </Text>
           <TextInput
-            className="border-[1px] py-4 px-2 text-xl mb-5"
+            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
             onChangeText={(text) =>
               setFormState((prevState) => ({
                 ...prevState,
@@ -138,11 +144,15 @@ const Page = () => {
             aria-label="input"
             aria-labelledby="first_name"
           />
-          <Text aria-label="Label for lastName" nativeID="last_name">
+          <Text
+            className="text-[#708090] mb-2"
+            aria-label="Label for lastName"
+            nativeID="last_name"
+          >
             Last Name
           </Text>
           <TextInput
-            className="border-[1px] py-4 px-2 text-xl mb-5"
+            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
             onChangeText={(text) =>
               setFormState((prevState) => ({ ...prevState, last_name: text }))
             }
@@ -151,11 +161,15 @@ const Page = () => {
             aria-label="input"
             aria-labelledby="last_name"
           />
-          <Text aria-label="Label for gender" nativeID="gender">
+          <Text
+            className="text-[#708090] mb-2"
+            aria-label="Label for gender"
+            nativeID="gender"
+          >
             Gender
           </Text>
           <TextInput
-            className="border-[1px] py-4 px-2 text-xl mb-5"
+            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
             onChangeText={(text) =>
               setFormState((prevState) => ({ ...prevState, gender: text }))
             }
@@ -164,11 +178,15 @@ const Page = () => {
             aria-label="input"
             aria-labelledby="gender"
           />
-          <Text aria-label="Label for email" nativeID="email">
+          <Text
+            className="text-[#708090] mb-2"
+            aria-label="Label for email"
+            nativeID="email"
+          >
             Email
           </Text>
           <TextInput
-            className="border-[1px] py-4 px-2 text-xl mb-5"
+            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
             onChangeText={(text) =>
               setFormState((prevState) => ({ ...prevState, email: text }))
             }
@@ -177,11 +195,15 @@ const Page = () => {
             aria-label="input"
             aria-labelledby="email"
           />
-          <Text aria-label="Label for occupation" nativeID="occupation">
+          <Text
+            className="text-[#708090] mb-2"
+            aria-label="Label for occupation"
+            nativeID="occupation"
+          >
             Occupation
           </Text>
           <TextInput
-            className="border-[1px] py-4 px-2 text-xl mb-5"
+            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
             onChangeText={(text) =>
               setFormState((prevState) => ({
                 ...prevState,
@@ -193,11 +215,15 @@ const Page = () => {
             aria-label="input"
             aria-labelledby="occupation"
           />
-          <Text aria-label="Label for residence" nativeID="residence">
+          <Text
+            className="text-[#708090] mb-2"
+            aria-label="Label for residence"
+            nativeID="residence"
+          >
             Residence
           </Text>
           <TextInput
-            className="border-[1px] py-4 px-2 text-xl mb-5"
+            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
             onChangeText={(text) =>
               setFormState((prevState) => ({ ...prevState, residence: text }))
             }
@@ -206,11 +232,15 @@ const Page = () => {
             aria-label="input"
             aria-labelledby="residence"
           />
-          <Text aria-label="Label for telephone" nativeID="telephone">
+          <Text
+            className="text-[#708090] mb-2"
+            aria-label="Label for telephone"
+            nativeID="telephone"
+          >
             Telephone
           </Text>
           <TextInput
-            className="border-[1px] py-4 px-2 text-xl mb-5"
+            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
             onChangeText={(text) =>
               setFormState((prevState) => ({ ...prevState, telephone: text }))
             }
@@ -229,10 +259,10 @@ const Page = () => {
               style={{ width: "100%", height: 150, marginBottom: 10 }}
             />
           )}
-          <Button title="Pick Image" onPress={pickImage} />
+          <Button color={"#589E23"} title="Pick Image" onPress={pickImage} />
 
           <Pressable onPress={handlePress}>
-            <View className="flex-row justify-center mt-10 py-4 bg-[#D18A0D] rounded-xl">
+            <View className="flex-row justify-center mt-10 py-4 bg-[#589E23] rounded-xl">
               <Text className="text-center text-xl text-white">
                 Update Profile
               </Text>
