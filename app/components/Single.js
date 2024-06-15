@@ -28,7 +28,7 @@ const Page = ({ title, data, isLoading }) => {
           </Text>
         </View>
 
-        <View className="bg-[#589E23] self-center p-5 overflow-hidden w-[60%] mx-auto my-0 rounded-xl">
+        <View className="bg-[#589E23] self-center p-5 overflow-hidden w-[60%] mx-auto my-0 rounded-tl-3xl rounded-tr-lg rounded-br-3xl">
           <View className="flex-row justify-center items-center ">
             <View>
               <Text className="text-white text-lg text-center">

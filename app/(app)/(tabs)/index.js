@@ -113,7 +113,7 @@ export default function Page() {
           </Pressable>
           <View className=" mx-5 bg-[#fff] p-5 gap-7 rounded-xl flex-row justify-between items-center">
             <View>
-              <Text className=" text-[#0F0F0F] text-lg">
+              <Text className=" text-[#708090] text-lg">
                 Current Saving Balance
               </Text>
               <Text className="text-3xl text-[#589E23] font-bold mt-3">
@@ -160,16 +160,16 @@ export default function Page() {
         setModalVisible={setModalVisible}
       />
       {/* Loan */}
-      <View className="bg-[#fff] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg">
+      <View className="bg-[#fff] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg rounded-br-3xl">
         <View className="flex-row gap-7 items-center mx-7">
           <FontAwesome size={38} name="money" color={"#589E23"} />
           <View>
             <Text className="text-2xl text-[#0F0F0F]">Get A Loan</Text>
-            <Text className="text-[#0F0F0F]">Today, May 4</Text>
+            <Text className="text-[#708090]">Today, May 4</Text>
           </View>
         </View>
         <View className="mx-5">
-          <TouchableOpacity className="bg-[#589E23] p-5 mx-2 rounded-sm">
+          <TouchableOpacity className="bg-[#589E23] p-5 mx-2 rounded-xl">
             <Text className="text-center text-[#fff] font-semibold text-xl">
               Apply For Loan
             </Text>
