@@ -18,21 +18,21 @@ export default function Layout() {
           options={{
             headerRight: () => (
               <TouchableHighlight
-                onPress={() => router.push("/(app)/(tabs)/loan/payment")}
+                // onPress={() => router.push("/(app)/(tabs)/loan/payment")}
                 className="pr-5"
               >
-                <Text className="text-[#589E23] font-bold">Loan Payments</Text>
+                <Text className="text-[#589E23] font-bold">GET LOAN</Text>
               </TouchableHighlight>
             ),
             drawerLabel: "Loans",
             headerTitle: "",
             headerTitleAlign: "center",
             headerTintColor: "#0F0F0F",
-            headerLeft: () => (
-              <Pressable className="pl-5">
-                <Text className="text-[#589E23] font-bold">GET LOAN</Text>
-              </Pressable>
-            ),
+            // headerLeft: () => (
+            //   <Pressable className="pl-5">
+            //     <Text className="text-[#589E23] font-bold">GET LOAN</Text>
+            //   </Pressable>
+            // ),
             unmountOnBlur: true,
           }}
         />
@@ -43,6 +43,7 @@ export default function Layout() {
             headerTitleAlign: "center",
             drawerLabel: "All Loans Transactions",
             headerTintColor: "#0F0F0F",
+            unmountOnBlur: true,
           }}
         />
         <Drawer.Screen
@@ -52,6 +53,7 @@ export default function Layout() {
             headerTitleAlign: "center",
             drawerLabel: "Loan Payments",
             headerTintColor: "#0F0F0F",
+            unmountOnBlur: true,
           }}
         />
       </Drawer>

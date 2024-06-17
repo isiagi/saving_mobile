@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { SafeAreaView } from "react-native-safe-area-context";
 
 // import SavingInterest from "./SavingInterest";
@@ -14,9 +14,20 @@ import Bottom from "./ui/bottomSheet/BottomSheet";
 import { router, usePathname } from "expo-router";
 
 const Page = ({ title, data, isLoading }) => {
+  const [totalAmount, setTotalAmount] = useState(0);
+
   const tabPath = usePathname();
 
   const toRoute = tabPath.split("/")[1];
+
+  useEffect(() => {
+    if (data) {
+      const total = data.reduce((prev, curr) => {
+        return prev + (curr.amount || 0);
+      }, 0);
+      setTotalAmount(parseFloat(total));
+    }
+  }, [data]);
 
   return (
     <View className="flex-1 overflow-hidden">
@@ -34,7 +45,9 @@ const Page = ({ title, data, isLoading }) => {
               <Text className="text-white text-lg text-center">
                 {title} Balance
               </Text>
-              <Text className="text-white text-3xl mt-2">300,000 UGX</Text>
+              <Text className="text-white text-3xl mt-2">
+                {totalAmount} UGX
+              </Text>
             </View>
             {/* <View className="">
               {toRoute === "loan" && (

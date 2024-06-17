@@ -63,7 +63,11 @@ export default function Page() {
   const { raiseData, setLoading } = useContext(DataContext);
 
   // const [data, isLoading] = useGetById("user_profile/profile", authId);
-  const url = [{ url: `user_profile/profile/${authId}` }, { url: "saving" }];
+  const url = [
+    { url: `user_profile/profile/${authId}` },
+    { url: "saving" },
+    { url: "saving/data/2024/6" },
+  ];
 
   // raiseData(data);
   // setLoading(isLoading);
@@ -80,6 +84,8 @@ export default function Page() {
       />
     );
   }
+
+  const chartData = dataz[dataz.length - 1];
 
   const data = dataz[0];
   raiseData(data);
@@ -136,7 +142,7 @@ export default function Page() {
             View Savings
           </Text>
         </View>
-        <Chart />
+        <Chart chartData={chartData} />
       </View>
       {/* <View className="px-5 my-10">
         <FlatList

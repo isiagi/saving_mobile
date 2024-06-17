@@ -24,6 +24,7 @@ const AuthContextProvider = ({ children }) => {
       if (token) {
         setAuthToken(token);
         setAuthId(id);
+        setIsLoading(false);
       }
       setIsLoading(false);
     };

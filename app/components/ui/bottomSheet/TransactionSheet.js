@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import {
   BottomSheetModal,
@@ -45,9 +46,23 @@ const Item = ({ data }) => (
       <View className="bg-white w-10 h-10 rounded-full justify-center items-center">
         <FontAwesome size={24} name="dollar" color={"#D18A0D"} />
       </View>
-      <View>
+      {/* <View>
         <Text className="text-xl text-[#fff]">{data.member_name}</Text>
         <Text className="text-[#d3d3d3]">{data.date_of_payment}</Text>
+      </View> */}
+      <View>
+        {Object.keys(data).map(
+          (key) =>
+            key === "date_of_payment" ||
+            (key === "member_id" && (
+              <View key={key}>
+                <Text className="text-xl text-[#fff]">
+                  {key.replace(/_/g, " ")}
+                </Text>
+                <Text className="text-[#d3d3d3]">{data[key]}</Text>
+              </View>
+            ))
+        )}
       </View>
     </View>
 
@@ -59,13 +74,7 @@ const Item = ({ data }) => (
 );
 
 const TransactionSheet = ({ data, isLoading }) => {
-  if (isLoading)
-    return (
-      <View className="flex-1 justify-center items-center">
-        <ActivityIndicator size={"large"} />
-        <Text>Loading...</Text>
-      </View>
-    );
+  const [modalData, setModalData] = useState({});
 
   // ref
   const bottomSheetModalRef = useRef();
@@ -74,13 +83,22 @@ const TransactionSheet = ({ data, isLoading }) => {
   const snapPoints = useMemo(() => [200, 400], []);
 
   // callbacks
-  const handlePresentModalPress = useCallback(() => {
+  const handlePresentModalPress = useCallback((item) => {
     // useModalStore.getState().openModal(); // Call the openModal function from the store
     bottomSheetModalRef.current.present();
+    setModalData(item);
   }, []);
   const handleSheetChanges = useCallback((index) => {
     console.log("handleSheetChanges", index);
   }, []);
+
+  if (isLoading)
+    return (
+      <View className="flex-1 justify-center items-center">
+        <ActivityIndicator size={"large"} />
+        <Text>Loading...</Text>
+      </View>
+    );
 
   // renders
   return (
@@ -98,7 +116,7 @@ const TransactionSheet = ({ data, isLoading }) => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   className=""
-                  onPress={handlePresentModalPress}
+                  onPress={() => handlePresentModalPress(item)}
                 >
                   <Item data={item} />
                 </TouchableOpacity>
@@ -113,7 +131,31 @@ const TransactionSheet = ({ data, isLoading }) => {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <Text>Awesome 🎉</Text>
+              <ScrollView className="flex-1">
+                <View>
+                  {modalData &&
+                    Object.keys(modalData).map(
+                      (key) =>
+                        key !== "user_id" &&
+                        key !== "created_at" &&
+                        key !== "updated_at" &&
+                        key !== "id" &&
+                        key !== "account_number" &&
+                        key !== "user" && (
+                          <View
+                            key={key}
+                            className="flex-row justify-between items-center w-full px-5 py-2"
+                          >
+                            <Text className="text-xl text-black">
+                              {key.replace(/_/g, " ")}
+                            </Text>
+                            <Text className="text-black">{modalData[key]}</Text>
+                          </View>
+                        )
+                    )}
+                </View>
+                {/* <Text>Awesome 🎉</Text> */}
+              </ScrollView>
             </BottomSheetView>
           </BottomSheetModal>
         </View>
