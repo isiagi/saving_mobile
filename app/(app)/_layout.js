@@ -16,7 +16,11 @@ export default function AppLayout() {
         }}
       />
       <Stack.Screen name="member" options={{ headerTitle: "Login" }} />
-      <Stack.Screen name="set-password" options={{ headerTitle: "Back" }} />
+      <Stack.Screen name="set-password" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="otp"
+        options={{ headerTitle: "Enter OTP", headerTitleAlign: "center" }}
+      />
     </Stack>
   );
 }

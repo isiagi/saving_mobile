@@ -21,11 +21,14 @@ const Page = ({ title, data, isLoading }) => {
   const toRoute = tabPath.split("/")[1];
 
   useEffect(() => {
-    if (data) {
-      const total = data.reduce((prev, curr) => {
-        return prev + (curr.amount || 0);
-      }, 0);
-      setTotalAmount(parseFloat(total));
+    if (data && data.length > 0) {
+      const total = data.reduce(
+        (acc, curr) => acc + parseFloat(curr.amount),
+        0
+      );
+      setTotalAmount(total);
+    } else {
+      setTotalAmount(0);
     }
   }, [data]);
 

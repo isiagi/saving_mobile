@@ -1,7 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, router } from "expo-router";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -74,7 +74,17 @@ export default function Page() {
 
   const [dataz, isLoading, error] = useFetchMultiple(url);
 
-  setLoading(isLoading);
+  // Use useEffect to handle side effects
+  useEffect(() => {
+    setLoading(isLoading);
+  }, [isLoading, setLoading]);
+
+  useEffect(() => {
+    if (dataz.length > 0) {
+      raiseData(dataz[0]);
+    }
+  }, [dataz, raiseData]);
+
   if (isLoading) {
     return (
       <Spinner
@@ -85,10 +95,12 @@ export default function Page() {
     );
   }
 
+  // console.log(dataz[dataz.length - 1], "chart data");
+
   const chartData = dataz[dataz.length - 1];
 
   const data = dataz[0];
-  raiseData(data);
+  // raiseData(data);
 
   const image_url = data[0] && data[0].image_url;
   return (
