@@ -7,6 +7,7 @@ export const unstable_settings = {
 export default function AppLayout() {
   return (
     <Stack>
+      <Stack.Screen name="board" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="sign-in"

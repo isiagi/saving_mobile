@@ -20,6 +20,7 @@ import useGetById from "../../hooks/useGetById";
 import { DataContext } from "../../store/dataCtx";
 import useFetchMultiple from "../../hooks/useFetchHome";
 import Spinner from "react-native-loading-spinner-overlay";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DATA = [
   {
@@ -101,6 +102,8 @@ export default function Page() {
 
   const data = dataz[0];
   // raiseData(data);
+
+  console.log(data, "data");
 
   const image_url = data[0] && data[0].image_url;
   return (

@@ -81,7 +81,7 @@ const Bottom = ({ data, isLoading }) => {
 
   if (isLoading)
     return (
-      <View className="flex-1 justify-center items-center bg-white">
+      <View className="flex-1 justify-center items-center bg-[#b09601]">
         <ActivityIndicator size={"large"} />
       </View>
     );
@@ -165,7 +165,7 @@ const Bottom = ({ data, isLoading }) => {
 const styles = StyleSheet.create({
   container: {
     // justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#b09601",
     flex: 1,
   },
   contentContainer: {

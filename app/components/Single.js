@@ -65,7 +65,7 @@ const Page = ({ title, data, isLoading }) => {
       {/* <SavingInterest /> */}
 
       {/* <Link href="/">Home</Link> */}
-      <View className="px-5 py-7 flex-row justify-between items-center bg-white rounded-tr-[30px] rounded-tl-[30px]">
+      <View className="px-5 py-7 flex-row justify-between items-center bg-[#b09601] rounded-tr-[30px] rounded-tl-[30px]">
         <View>
           <Text className="text-2xl text-[#0F0F0F]">Previous {title}</Text>
           <Text className="text-[#708090]">Today, May 4</Text>
