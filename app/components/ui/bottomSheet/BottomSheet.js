@@ -16,6 +16,7 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { usePathname } from "expo-router";
 
 const DATA = [
   {
@@ -36,31 +37,42 @@ const DATA = [
   },
 ];
 
-const Item = ({ data }) => (
-  <View
-    style={styles.shadow}
-    className="p-5 mt-3 flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
-  >
-    <View className="flex-row items-center gap-4">
-      <View className="bg-[#fff] w-10 h-10 rounded-full justify-center items-center">
-        <FontAwesome size={24} name="money" color={"#589E23"} />
+const Item = ({ data }) => {
+  console.log(data, "data");
+  return (
+    <View
+      style={styles.shadow}
+      className="p-5 mt-3 flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+    >
+      <View className="flex-row items-center gap-4">
+        <View className="bg-[#fff] w-10 h-10 rounded-full justify-center items-center">
+          <FontAwesome size={24} name="money" color={"#589E23"} />
+        </View>
+        <View>
+          <Text className="text-2xl text-[#fff]">
+            {data.member_name || data.member_id.first_name}
+          </Text>
+          <Text className="text-[#fff] text-lg pt-1">
+            {data.date_of_payment}
+          </Text>
+        </View>
       </View>
-      <View>
-        <Text className="text-2xl text-[#fff]">{data.member_name}</Text>
-        <Text className="text-[#fff] text-lg pt-1">{data.date_of_payment}</Text>
-      </View>
-    </View>
 
-    <View>
-      <Text className="text-xl text-[#fff]">Amount</Text>
-      <Text className="text-[#fff] text-xl pt-1">{data.amount}</Text>
+      <View>
+        <Text className="text-xl text-[#fff]">Amount</Text>
+        <Text className="text-[#fff] text-xl pt-1">{data.amount}</Text>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const Bottom = ({ data, isLoading }) => {
   // ref
   const bottomSheetModalRef = useRef();
+
+  const tabPath = usePathname();
+
+  console.log(tabPath, "tabPath");
 
   // variables
   const snapPoints = useMemo(() => [200, 400], []);
@@ -127,14 +139,16 @@ const Bottom = ({ data, isLoading }) => {
               <View className="flex-row justify-between pt-4">
                 <Text className="text-lg text-[#0F0F0F]">Membership ID : </Text>
                 <Text className="text-lg text-[#708090]">
-                  {modalData && modalData.member_id}
+                  {modalData && tabPath === "/loan" ? modalData.member_id : ""}
                 </Text>
               </View>
 
               <View className="flex-row justify-between py-4">
                 <Text className="text-lg text-[#0F0F0F]">Member Name: </Text>
                 <Text className="text-lg text-[#708090]">
-                  {modalData && modalData.member_name}
+                  {modalData && tabPath === "/loan"
+                    ? modalData.member_name
+                    : ""}
                 </Text>
               </View>
 

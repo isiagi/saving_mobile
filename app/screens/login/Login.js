@@ -50,8 +50,8 @@ const Login = () => {
     <View className="flex-1 px-5 bg-white">
       <SafeAreaView />
       <View className="my-8">
-        <Text className="text-3xl">To Get</Text>
-        <Text className="text-5xl pt-3 font-semibold">Started</Text>
+        <Text className="text-3xl">Welcome To</Text>
+        <Text className="text-4xl pt-3 font-semibold">Agalyawamu App</Text>
       </View>
       <Text className="text-center text-3xl font-semibold my-4 text-[#0D68D1]">
         Login

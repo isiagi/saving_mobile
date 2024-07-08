@@ -1,5 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 
+import {
+  verticalScale,
+  horizontalScale,
+  moderateScale,
+} from "./app/components/ui/Metrics";
+
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],

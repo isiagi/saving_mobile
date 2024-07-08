@@ -20,6 +20,7 @@ import useGetById from "../../hooks/useGetById";
 import { DataContext } from "../../store/dataCtx";
 import useFetchMultiple from "../../hooks/useFetchHome";
 import Spinner from "react-native-loading-spinner-overlay";
+import { verticalScale as vs } from "../../components/ui/Metrics";
 
 const DATA = [
   {
@@ -66,8 +67,10 @@ export default function Page() {
   const url = [
     { url: `user_profile/profile/${authId}` },
     { url: "saving" },
-    { url: "saving/data/2024/6" },
+    { url: "saving/data/2024/7" },
   ];
+
+  // todo: make { url: "saving/data/2024/7" }, match previous month data
 
   // raiseData(data);
   // setLoading(isLoading);
@@ -98,6 +101,8 @@ export default function Page() {
   // console.log(dataz[dataz.length - 1], "chart data");
 
   const chartData = dataz[dataz.length - 1];
+
+  console.log(chartData, "chart data");
 
   const data = dataz[0];
   // raiseData(data);
@@ -150,7 +155,10 @@ export default function Page() {
           <Text className="text-2xl font-medium pb-3 text-[#0F0F0F]">
             Last Month Saving
           </Text>
-          <Text className="text-lg pb-3 text-[#589E23] font-bold">
+          <Text
+            style={{ paddingBottom: vs(10) }}
+            className="text-lg  text-[#589E23] font-bold"
+          >
             View Savings
           </Text>
         </View>
