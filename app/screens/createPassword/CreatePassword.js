@@ -5,6 +5,18 @@ import { AuthContext } from "../../store/ctx";
 import { router } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import setPasswordRoute from "../../utils/api_routes/auth/setPassword";
+import { Form, Spinner, Input, YStack, Button, styled } from "tamagui";
+import {
+  verticalScale as vs,
+  horizontalScale as hs,
+  moderateScale as ms,
+} from "../../components/ui/Metrics";
+
+const CustomButton = styled(Button, {
+  backgroundColor: "#589E23", // Change this to your desired color
+  borderRadius: 8,
+  padding: 12,
+});
 
 const CreatePassword = ({ membership_id }) => {
   const [password, setPassword] = React.useState({
@@ -12,6 +24,7 @@ const CreatePassword = ({ membership_id }) => {
     confirmPassword: "",
   });
   const [passMatch, setPassMatch] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
 
   const authCtx = useContext(AuthContext);
 
@@ -37,6 +50,7 @@ const CreatePassword = ({ membership_id }) => {
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const response = await setPasswordRoute({
         membership: membership_id,
         password: password.password,
@@ -47,43 +61,126 @@ const CreatePassword = ({ membership_id }) => {
       setPassword({ password: "", confirmPassword: "" });
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <View className="flex-1 px-5 bg-white">
       <SafeAreaView />
-      <View className="my-8">
-        <Text className="text-3xl">To Get</Text>
-        <Text className="text-5xl pt-3 font-semibold">Started</Text>
+      <View style={{ marginTop: vs(30) }}>
+        <Text style={{ fontSize: ms(20) }}>To Get</Text>
+        <Text
+          style={{ fontSize: ms(30), paddingTop: vs(5) }}
+          className=" font-semibold text-[#589E23]"
+        >
+          Started
+        </Text>
       </View>
-      <Text className="text-center text-3xl font-semibold my-4 text-[#0D68D1]">
-        Set Password
-      </Text>
+      <View className="flex-1 justify-center">
+        <Text
+          style={{ fontSize: ms(20), marginTop: vs(30), marginBottom: vs(20) }}
+          className="text-center font-semibold my-4 text-slate-800"
+        >
+          Set Password
+        </Text>
 
-      <View className="mt-8">
-        <TextInput
+        <Form onSubmit={handleSubmit}>
+          <YStack
+            width={"100%"}
+            minHeight={200}
+            overflow="hidden"
+            space="$2"
+            padding="$2"
+            marginTop="$2"
+            gap="$2"
+            backgroundColor="#fff"
+          >
+            <Input
+              backgroundColor="#fff"
+              padding="$4"
+              size={"$6"}
+              onChangeText={onPasswordSet}
+              value={password.password}
+              placeholder="Enter Password"
+              secureTextEntry
+              color="#589E23"
+            />
+            <Input
+              backgroundColor="#fff"
+              padding="$4"
+              size={"$6"}
+              onChangeText={onPasswordConfirm}
+              value={password.confirmPassword}
+              placeholder="Confirm Password"
+              secureTextEntry
+              color="#589E23"
+            />
+          </YStack>
+          {!passMatch && (
+            <Text className="text-red-500 text-sm">Passwords do not match</Text>
+          )}
+          {/* <View className="mt-8">
+            <TextInput
+              className="border-[1px] py-4 px-2 mb-7 text-xl"
+              style={""}
+              onChangeText={onChangeText}
+              value={text}
+              placeholder="Membership ID"
+            />
+            <View className="mb-7">
+              <TextInput
+                className="border-[1px] py-4 px-2 text-xl"
+                onChangeText={onPassword}
+                value={password}
+                placeholder="Password"
+                secureTextEntry
+              />
+              <Pressable
+                className="mt-2"
+                onPress={() => router.navigate("/(app)/member")}
+              >
+                <Text className="text-[#0D68D1]">Or Register</Text>
+              </Pressable>
+            </View>
+          </View> */}
+          {/* <TouchableOpacity className="bg-[#D18A0D]" onPress={handleLogIn}>
+          <Text className="text-center text-white py-4 text-xl">Login</Text>
+        </TouchableOpacity> */}
+          <Form.Trigger
+            asChild
+            disabled={password.password === "" || !passMatch}
+          >
+            <CustomButton
+              icon={loading ? () => <Spinner /> : undefined}
+              size="$5"
+            >
+              Set Password
+            </CustomButton>
+          </Form.Trigger>
+        </Form>
+      </View>
+      <View>
+        {/* <TextInput
           className="border-[1px] py-4 px-2 mb-7"
           style={""}
           onChangeText={onPasswordSet}
           value={password.password}
           placeholder="Enter Password"
           secureTextEntry
-        />
-        <View className="mb-7">
-          <TextInput
+        /> */}
+        <View>
+          {/* <TextInput
             className="border-[1px] py-4 px-2"
             onChangeText={onPasswordConfirm}
             value={password.confirmPassword}
             placeholder="Confirm Password"
             secureTextEntry
-          />
-          {!passMatch && (
-            <Text className="text-red-500 text-sm">Passwords do not match</Text>
-          )}
+          /> */}
         </View>
       </View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         className="bg-[#D18A0D]"
         onPress={handleSubmit}
         // onPress={() => {
@@ -94,7 +191,7 @@ const CreatePassword = ({ membership_id }) => {
         <Text className="text-center text-white py-4 text-xl">
           Set Password
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

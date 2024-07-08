@@ -21,6 +21,7 @@ import { DataContext } from "../../store/dataCtx";
 import useFetchMultiple from "../../hooks/useFetchHome";
 import Spinner from "react-native-loading-spinner-overlay";
 import { verticalScale as vs } from "../../components/ui/Metrics";
+import { Button, styled } from "tamagui";
 
 const DATA = [
   {
@@ -40,6 +41,11 @@ const DATA = [
   //   title: "Second Item",
   // },
 ];
+
+const CustomButton = styled(Button, {
+  backgroundColor: "#589E23", // Change this to your desired color
+  borderRadius: 8,
+});
 
 const Item = ({ title }) => (
   <View className="bg-slate-600 p-5 mt-5 flex-row items-center gap-4 justify-between">
@@ -80,6 +86,7 @@ export default function Page() {
   // Use useEffect to handle side effects
   useEffect(() => {
     setLoading(isLoading);
+    // AsyncStorage.removeItem("authToken");
   }, [isLoading, setLoading]);
 
   useEffect(() => {
@@ -195,11 +202,9 @@ export default function Page() {
           </View>
         </View>
         <View className="mx-5">
-          <TouchableOpacity className="bg-[#589E23] p-5 mx-2 rounded-xl">
-            <Text className="text-center text-[#fff] font-semibold text-xl">
-              Apply For Loan
-            </Text>
-          </TouchableOpacity>
+          <CustomButton size="$6" color="#fff">
+            Apply For Loan
+          </CustomButton>
         </View>
       </View>
       {/* <View className="mx-5 flex-1">

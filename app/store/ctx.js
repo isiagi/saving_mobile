@@ -9,6 +9,7 @@ export const AuthContext = createContext({
   isAuthenticated: false,
   authenticate: (token) => {},
   logout: () => {},
+  isLoading: true,
 });
 
 const AuthContextProvider = ({ children }) => {
@@ -60,6 +61,7 @@ const AuthContextProvider = ({ children }) => {
     authenticate,
     logout,
     authId,
+    isLoading,
   };
 
   if (isLoading) {

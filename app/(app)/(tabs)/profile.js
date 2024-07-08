@@ -17,6 +17,13 @@ import { router } from "expo-router";
 import useGetById from "../../hooks/useGetById";
 import { DataContext } from "../../store/dataCtx";
 import Spinner from "react-native-loading-spinner-overlay";
+import { Form, styled, Button } from "tamagui";
+
+const CustomButton = styled(Button, {
+  backgroundColor: "#589E23", // Change this to your desired color
+  borderRadius: 8,
+  padding: 12,
+});
 
 const Page = () => {
   const authCtx = useContext(AuthContext);
@@ -150,7 +157,18 @@ const Page = () => {
               </Text>
             </View>
 
-            <Pressable onPress={authCtx.logout}>
+            <Form onSubmit={authCtx.logout}>
+              <Form.Trigger asChild>
+                <CustomButton
+                  size="$5"
+                  icon={authCtx.isLoading ? () => <Spinner /> : undefined}
+                >
+                  Log Out
+                </CustomButton>
+              </Form.Trigger>
+            </Form>
+
+            {/* <Pressable onPress={authCtx.logout}>
               <View className="flex-row items-center justify-center mt-10 mb-10 py-4 bg-[#589E23] rounded-xl">
                 {isLoading && (
                   <View>
@@ -159,7 +177,7 @@ const Page = () => {
                 )}
                 <Text className="text-center text-xl text-white">Log Out</Text>
               </View>
-            </Pressable>
+            </Pressable> */}
           </View>
         </View>
       </SafeAreaView>
