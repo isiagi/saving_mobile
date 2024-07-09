@@ -17,6 +17,11 @@ import {
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  verticalScale as vs,
+  moderateScale as ms,
+  horizontalScale as hs,
+} from "../Metrics";
 
 // const DATA = [
 //   {
@@ -39,12 +44,26 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Item = ({ data }) => (
   <View
-    style={styles.shadow}
-    className="p-5 mt-6 mx-5 flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+    style={[
+      styles.shadow,
+      {
+        marginTop: vs(10),
+        paddingTop: vs(20),
+        paddingBottom: vs(20),
+        paddingLeft: hs(10),
+        paddingRight: hs(10),
+        marginLeft: hs(10),
+        marginRight: hs(10),
+      },
+    ]}
+    className=" flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
   >
-    <View className="flex-row items-center gap-4">
-      <View className="bg-white w-10 h-10 rounded-full justify-center items-center">
-        <FontAwesome size={24} name="dollar" color={"#D18A0D"} />
+    <View className="flex-row items-center gap-3">
+      <View
+        style={{ width: hs(30), height: vs(30), borderRadius: ms(20) }}
+        className="bg-white  justify-center items-center"
+      >
+        <FontAwesome size={15} name="dollar" color={"#D18A0D"} />
       </View>
       {/* <View>
         <Text className="text-xl text-[#fff]">{data.member_name}</Text>
@@ -56,7 +75,7 @@ const Item = ({ data }) => (
             key === "date_of_payment" ||
             (key === "member_id" && (
               <View key={key}>
-                <Text className="text-xl text-[#fff]">
+                <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
                   {key.replace(/_/g, " ")}
                 </Text>
                 <Text className="text-[#d3d3d3]">{data[key]}</Text>
@@ -67,8 +86,12 @@ const Item = ({ data }) => (
     </View>
 
     <View>
-      <Text className="text-xl text-[#fff]">Amount</Text>
-      <Text className="text-[#d3d3d3]">{data.amount}</Text>
+      <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
+        Amount
+      </Text>
+      <Text style={{ fontSize: ms(16) }} className="text-[#d3d3d3]">
+        {data.amount}
+      </Text>
     </View>
   </View>
 );

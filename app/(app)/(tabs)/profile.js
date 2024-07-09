@@ -18,6 +18,11 @@ import useGetById from "../../hooks/useGetById";
 import { DataContext } from "../../store/dataCtx";
 import Spinner from "react-native-loading-spinner-overlay";
 import { Form, styled, Button } from "tamagui";
+import {
+  verticalScale as vs,
+  horizontalScale as hs,
+  moderateScale as ms,
+} from "../../components/ui/Metrics";
 
 const CustomButton = styled(Button, {
   backgroundColor: "#589E23", // Change this to your desired color
@@ -51,108 +56,194 @@ const Page = () => {
         textStyle={{ color: "#FFF" }}
       />
       <SafeAreaView>
-        <View className="flex-row justify-between items-center mt-5">
+        <View
+          style={{ marginTop: vs(30) }}
+          className="flex-row justify-between items-center"
+        >
           <TouchableOpacity
             onPress={() => router.push("editProfile")}
-            className="bg-[#589E23] w-[100px] py-2 mx-5 rounded-xl"
+            style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+            className="bg-[#589E23] w-[100px]  mx-5 rounded-xl"
           >
-            <Text className="text-center text-xl text-white">Edit Profile</Text>
+            <Text
+              style={{ fontSize: ms(15) }}
+              className="text-center  text-white"
+            >
+              Edit Profile
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity className="mr-5">
-            <Text className="text-[#589E23] text-xl font-bold">LogOut</Text>
+            <Text
+              style={{ fontSize: ms(15) }}
+              className="text-[#589E23]  font-medium"
+            >
+              LogOut
+            </Text>
           </TouchableOpacity>
         </View>
-        <View className="items-center py-10">
+        <View
+          style={{ paddingTop: vs(35), paddingBottom: vs(35) }}
+          className="items-center"
+        >
           <View className="text-center items-center">
             <Image
-              style={{ width: 130, height: 130, borderRadius: 50 }}
+              style={{ width: hs(100), height: vs(100), borderRadius: ms(50) }}
               source={{
                 uri: image_url || "https://reactnative.dev/img/tiny_logo.png",
               }}
             />
-            <Text className="text-[#0F0F0F] text-4xl pt-5">
+            <Text
+              style={{ fontSize: ms(25), paddingTop: vs(10) }}
+              className="text-[#0F0F0F]"
+            >
               {data[0] && data[0].user.last_name}
             </Text>
           </View>
         </View>
 
         <View className="flex-1 bg-white rounded-t-3xl">
-          <View className=" px-5 pt-7">
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+          <View
+            style={{
+              paddingTop: vs(20),
+              paddingLeft: hs(20),
+              paddingRight: hs(20),
+              paddingBottom: vs(20),
+            }}
+          >
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F] font-semibold"
+              >
                 Membership No. :{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text
+                style={{ fontSize: ms(17) }}
+                className="text-xl text-[#708090]"
+              >
                 {data[0] && data[0].user.username}
               </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F] font-semibold"
+              >
                 First Name :{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
                 {data[0] && data[0].user.first_name}
               </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F]  font-semibold"
+              >
                 Last Name :{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
                 {data[0] && data[0].user.last_name}
               </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F]  font-semibold"
+              >
                 NIN:{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">3VvYh@example.com</Text>
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
+                3VvYh@example.com
+              </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F]  font-semibold"
+              >
                 Email:{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
                 {data[0] && data[0].user.email}
               </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F]  font-semibold"
+              >
                 Place of Residence:{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
                 {data[0] && data[0].residence}
               </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F]  font-semibold"
+              >
                 Occupation:{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
                 {data[0] && data[0].occupation}
               </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F]  font-semibold"
+              >
                 Gender:{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
                 {data[0] && data[0].gender}
               </Text>
             </View>
 
-            <View className="flex-row justify-between py-4">
-              <Text className="text-[#0F0F0F] text-xl font-semibold">
+            <View
+              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              className="flex-row justify-between"
+            >
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#0F0F0F]  font-semibold"
+              >
                 Phone:{" "}
               </Text>
-              <Text className="text-xl text-[#708090]">
+              <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
                 {data[0] && data[0].telephone}
               </Text>
             </View>

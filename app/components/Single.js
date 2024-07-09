@@ -12,6 +12,11 @@ import React, { useEffect, useState } from "react";
 // import SavingInterest from "./SavingInterest";
 import Bottom from "./ui/bottomSheet/BottomSheet";
 import { router, usePathname } from "expo-router";
+import {
+  verticalScale as vs,
+  moderateScale as ms,
+  horizontalScale as hs,
+} from "./ui/Metrics";
 
 const Page = ({ title, data, isLoading }) => {
   const [totalAmount, setTotalAmount] = useState(0);
@@ -35,20 +40,35 @@ const Page = ({ title, data, isLoading }) => {
   return (
     <View className="flex-1 overflow-hidden">
       <StatusBar barStyle={"dark-content"} />
-      <View className=" mb-11 flex">
-        <View className=" py-10 items-center">
-          <Text className="text-[#0F0F0F] text-3xl max-w-[200px] text-center">
+      <View style={{ marginBottom: vs(50) }} className=" flex">
+        <View
+          style={{ marginTop: vs(30), marginBottom: vs(30) }}
+          className="items-center"
+        >
+          <Text
+            style={{ fontSize: ms(25) }}
+            className="text-[#0F0F0F]  text-center"
+          >
             Your {title}
           </Text>
         </View>
 
-        <View className="bg-[#589E23] self-center p-5 overflow-hidden w-[60%] mx-auto my-0 rounded-tl-3xl rounded-tr-lg rounded-br-3xl">
+        <View
+          style={{ paddingTop: vs(20), paddingBottom: vs(20) }}
+          className="bg-[#589E23] self-center p-5 overflow-hidden w-[60%] mx-auto my-0 rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+        >
           <View className="flex-row justify-center items-center ">
             <View>
-              <Text className="text-white text-lg text-center">
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-white text-center"
+              >
                 {title} Balance
               </Text>
-              <Text className="text-white text-3xl mt-2">
+              <Text
+                style={{ fontSize: ms(25) }}
+                className="text-white text-3xl mt-2"
+              >
                 {totalAmount} UGX
               </Text>
             </View>
@@ -65,10 +85,22 @@ const Page = ({ title, data, isLoading }) => {
       {/* <SavingInterest /> */}
 
       {/* <Link href="/">Home</Link> */}
-      <View className="px-5 py-7 flex-row justify-between items-center bg-white rounded-tr-[30px] rounded-tl-[30px]">
+      <View
+        style={{
+          paddingBottom: vs(20),
+          paddingTop: vs(20),
+          paddingLeft: hs(20),
+          paddingRight: hs(20),
+        }}
+        className=" flex-row justify-between items-center bg-white rounded-tr-[30px] rounded-tl-[30px]"
+      >
         <View>
-          <Text className="text-2xl text-[#0F0F0F]">Previous {title}</Text>
-          <Text className="text-[#708090]">Today, May 4</Text>
+          <Text style={{ fontSize: ms(20) }} className=" text-[#0F0F0F]">
+            Previous {title}
+          </Text>
+          <Text style={{ fontSize: ms(15) }} className="text-[#708090]">
+            Today, May 4
+          </Text>
         </View>
         <View>
           <Pressable
@@ -80,7 +112,9 @@ const Page = ({ title, data, isLoading }) => {
               { padding: 6, borderRadius: 4 },
             ]}
           >
-            <Text className="text-[#589E23] font-bold">View All</Text>
+            <Text style={{ fontSize: ms(15) }} className="text-[#589E23] ">
+              View All
+            </Text>
           </Pressable>
         </View>
       </View>

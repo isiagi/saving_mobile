@@ -5,7 +5,6 @@ import {
   TextInput,
   Pressable,
   StatusBar,
-  Button,
   Image,
   ScrollView,
   TouchableOpacity,
@@ -18,6 +17,29 @@ import { AuthContext } from "../../store/ctx";
 import useGetById from "../../hooks/useGetById";
 import editMultiData from "../../hooks/useEditProfile";
 import { DataContext } from "../../store/dataCtx";
+import {
+  verticalScale as vs,
+  moderateScale as ms,
+  horizontalScale as hs,
+} from "../../components/ui/Metrics";
+import { Form, Input, Label, YStack, Button, styled, Spinner } from "tamagui";
+
+const formConfig = [
+  { name: "first_name", label: "First Name", placeholder: "First Name" },
+  { name: "last_name", label: "Last Name", placeholder: "Last Name" },
+  { name: "email", label: "Email", placeholder: "Email" },
+  { name: "occupation", label: "Occupation", placeholder: "Occupation" },
+  { name: "residence", label: "Residence", placeholder: "Residence" },
+  { name: "gender", label: "Gender", placeholder: "Gender" },
+  { name: "telephone", label: "Telephone", placeholder: "Telephone" },
+  // { name: "image_url", label: "Image URL", placeholder: "Image URL" },
+];
+
+const CustomButton = styled(Button, {
+  backgroundColor: "#589E23", // Change this to your desired color
+  borderRadius: 8,
+  padding: 12,
+});
 
 const Page = () => {
   const [image, setImage] = useState(null);
@@ -39,6 +61,7 @@ const Page = () => {
     telephone: "",
     image_url: {},
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (userData && userData[0]) {
@@ -95,6 +118,7 @@ const Page = () => {
   });
   const handlePress = async () => {
     try {
+      setLoading(true);
       await editMultiData(
         `user_profile/${userData[0] && userData[0].id}`,
         formData
@@ -102,7 +126,16 @@ const Page = () => {
       console.log("form", formData);
     } catch (error) {
       console.error(error.response?.data, error.toJSON());
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleChange = (name, value) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -110,8 +143,14 @@ const Page = () => {
       <StatusBar backgroundColor={"#fff"} />
       <SafeAreaView />
       <SafeAreaView>
-        <View className="flex-row justify-between items-center mt-24 mb-7">
-          <Text className="text-2xl font-medium text-[#0F0F0F]">
+        <View
+          style={{ marginTop: vs(60), marginBottom: vs(10) }}
+          className="flex-row justify-between items-center"
+        >
+          <Text
+            style={{ fontSize: ms(20) }}
+            className=" font-medium text-[#0F0F0F]"
+          >
             Edit Profile
           </Text>
 
@@ -119,156 +158,65 @@ const Page = () => {
             <TouchableOpacity
               onPress={() => router.replace("/(app)/(tabs)/profile")}
             >
-              <Text className="text-[#589E23] font-bold">Cancel</Text>
+              <Text
+                style={{ fontSize: ms(15) }}
+                className="text-[#589E23] font-bold"
+              >
+                Cancel
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
-        <View className="mb-7">
-          <Text
-            className="text-[#708090] mb-2"
-            aria-label="Label for firstName"
-            nativeID="first_name"
-          >
-            First Name
-          </Text>
-          <TextInput
-            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
-            onChangeText={(text) =>
-              setFormState((prevState) => ({
-                ...prevState,
-                first_name: text,
-              }))
-            }
-            value={formState.first_name}
-            placeholder="First Name"
-            aria-label="input"
-            aria-labelledby="first_name"
-          />
-          <Text
-            className="text-[#708090] mb-2"
-            aria-label="Label for lastName"
-            nativeID="last_name"
-          >
-            Last Name
-          </Text>
-          <TextInput
-            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
-            onChangeText={(text) =>
-              setFormState((prevState) => ({ ...prevState, last_name: text }))
-            }
-            value={formState.last_name}
-            placeholder="Last Name"
-            aria-label="input"
-            aria-labelledby="last_name"
-          />
-          <Text
-            className="text-[#708090] mb-2"
-            aria-label="Label for gender"
-            nativeID="gender"
-          >
-            Gender
-          </Text>
-          <TextInput
-            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
-            onChangeText={(text) =>
-              setFormState((prevState) => ({ ...prevState, gender: text }))
-            }
-            value={formState.gender}
-            placeholder="Gender"
-            aria-label="input"
-            aria-labelledby="gender"
-          />
-          <Text
-            className="text-[#708090] mb-2"
-            aria-label="Label for email"
-            nativeID="email"
-          >
-            Email
-          </Text>
-          <TextInput
-            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
-            onChangeText={(text) =>
-              setFormState((prevState) => ({ ...prevState, email: text }))
-            }
-            value={formState.email}
-            placeholder="Email"
-            aria-label="input"
-            aria-labelledby="email"
-          />
-          <Text
-            className="text-[#708090] mb-2"
-            aria-label="Label for occupation"
-            nativeID="occupation"
-          >
-            Occupation
-          </Text>
-          <TextInput
-            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
-            onChangeText={(text) =>
-              setFormState((prevState) => ({
-                ...prevState,
-                occupation: text,
-              }))
-            }
-            value={formState.occupation}
-            placeholder="Occupation"
-            aria-label="input"
-            aria-labelledby="occupation"
-          />
-          <Text
-            className="text-[#708090] mb-2"
-            aria-label="Label for residence"
-            nativeID="residence"
-          >
-            Residence
-          </Text>
-          <TextInput
-            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
-            onChangeText={(text) =>
-              setFormState((prevState) => ({ ...prevState, residence: text }))
-            }
-            value={formState.residence}
-            placeholder="Residence"
-            aria-label="input"
-            aria-labelledby="residence"
-          />
-          <Text
-            className="text-[#708090] mb-2"
-            aria-label="Label for telephone"
-            nativeID="telephone"
-          >
-            Telephone
-          </Text>
-          <TextInput
-            className="border-[1px] text-[#0F0F0F] py-4 px-2 text-xl mb-5 border-[#589E23]"
-            onChangeText={(text) =>
-              setFormState((prevState) => ({ ...prevState, telephone: text }))
-            }
-            value={formState.telephone}
-            placeholder="Telephone"
-            aria-label="input"
-            aria-labelledby="telephone"
-          />
-          {formState.image_url && (
-            <Image
-              source={{
-                uri:
-                  `${formState.image_url}` ||
-                  "https://reactnative.dev/img/tiny_logo.png",
-              }}
-              style={{ width: "100%", height: 150, marginBottom: 10 }}
-            />
-          )}
-          <Button color={"#589E23"} title="Pick Image" onPress={pickImage} />
 
-          <Pressable onPress={handlePress}>
-            <View className="flex-row justify-center mt-10 py-4 bg-[#589E23] rounded-xl">
-              <Text className="text-center text-xl text-white">
-                Update Profile
-              </Text>
-            </View>
-          </Pressable>
-        </View>
+        <Form onSubmit={handlePress}>
+          <YStack width={"100%"} minHeight={200} overflow="hidden" gap="$2">
+            <YStack>
+              <YStack>
+                {formConfig.map((field) => (
+                  <React.Fragment key={field.name}>
+                    <Label color="#0F0F0F" htmlFor={field.name}>
+                      {field.label}
+                    </Label>
+                    <Input
+                      backgroundColor="#fff"
+                      padding="$1"
+                      size={"$4"}
+                      onChangeText={(text) => handleChange(field.name, text)}
+                      value={formState[field.name]}
+                      placeholder={field.placeholder}
+                      color="#589E23"
+                      id={field.name}
+                    />
+                  </React.Fragment>
+                ))}
+              </YStack>
+            </YStack>
+          </YStack>
+          <View className="mb-7">
+            {formState.image_url && (
+              <Image
+                source={{
+                  uri:
+                    `${formState.image_url}` ||
+                    "https://reactnative.dev/img/tiny_logo.png",
+                }}
+                style={{ width: "100%", height: vs(150), marginBottom: vs(10) }}
+              />
+            )}
+
+            <CustomButton size="$5" onPress={pickImage}>
+              Pick Image
+            </CustomButton>
+          </View>
+          <Form.Trigger asChild disabled={loading}>
+            <CustomButton
+              icon={loading ? () => <Spinner /> : undefined}
+              size="$5"
+            >
+              Update Profile
+            </CustomButton>
+          </Form.Trigger>
+        </Form>
       </SafeAreaView>
     </ScrollView>
   );

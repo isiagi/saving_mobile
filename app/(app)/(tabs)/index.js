@@ -20,7 +20,11 @@ import useGetById from "../../hooks/useGetById";
 import { DataContext } from "../../store/dataCtx";
 import useFetchMultiple from "../../hooks/useFetchHome";
 import Spinner from "react-native-loading-spinner-overlay";
-import { verticalScale as vs } from "../../components/ui/Metrics";
+import {
+  horizontalScale as hs,
+  verticalScale as vs,
+  moderateScale as ms,
+} from "../../components/ui/Metrics";
 import { Button, styled } from "tamagui";
 
 const DATA = [
@@ -122,49 +126,78 @@ export default function Page() {
         <StatusBar barStyle={"dark-content"} />
         <View>
           <Pressable onPress={() => setModalVisible(!modalVisible)}>
-            <View className="flex-row justify-between items-center p-4 gap-2">
+            <View
+              style={{
+                paddingTop: vs(10),
+                paddingBottom: vs(20),
+                paddingLeft: hs(20),
+                paddingRight: hs(20),
+              }}
+              className="flex-row justify-between items-center gap-2"
+            >
               <View>
-                <View className="flex-row items-center justify-center gap-2">
-                  <Text className="text-2xl">Hello</Text>
-                  <Text className="text-3xl font-bold  text-[#0F0F0F]">
+                <View className="flex-row items-center justify-center gap-1">
+                  <Text style={{ fontSize: ms(18) }}>Hello</Text>
+                  <Text
+                    style={{ fontSize: ms(25) }}
+                    className="text-3xl font-bold  text-[#589E23]"
+                  >
                     {data[0] && data[0].user.last_name}
                   </Text>
                 </View>
-                <Text className="text-[#708090]">Have a nice day!</Text>
+                <Text style={{ fontSize: ms(15) }} className="text-[#708090]">
+                  Have a nice day!
+                </Text>
               </View>
 
               <Image
-                style={{ width: 40, height: 40 }}
+                style={{ width: hs(40), height: vs(40) }}
                 source={{
                   uri: image_url || "https://reactnative.dev/img/tiny_logo.png",
                 }}
               />
             </View>
           </Pressable>
-          <View className=" mx-5 bg-[#fff] p-5 gap-7 rounded-xl flex-row justify-between items-center">
+          <View
+            style={{
+              paddingTop: vs(25),
+              paddingBottom: vs(25),
+              paddingLeft: hs(20),
+              paddingRight: hs(20),
+              marginLeft: hs(20),
+              marginRight: hs(20),
+            }}
+            className=" bg-[#fff]  gap-7 rounded-xl flex-row justify-between items-center"
+          >
             <View>
-              <Text className=" text-[#708090] text-lg">
+              <Text style={{ fontSize: ms(15) }} className=" text-[#708090]">
                 Current Saving Balance
               </Text>
-              <Text className="text-3xl text-[#589E23] font-bold mt-3">
+              <Text
+                style={{ fontSize: ms(25), marginTop: vs(10) }}
+                className=" text-[#589E23] font-bold "
+              >
                 300000 shs
               </Text>
             </View>
             <View>
-              <FontAwesome size={36} name="money" color={"#589E23"} />
+              <FontAwesome size={30} name="money" color={"#589E23"} />
             </View>
           </View>
         </View>
       </SafeAreaView>
       {/* chart */}
       <View className="mx-5 my-7 ">
-        <View className="flex-row justify-between mb-2">
-          <Text className="text-2xl font-medium pb-3 text-[#0F0F0F]">
+        <View className="flex-row justify-between items-center mb-2">
+          <Text
+            style={{ paddingBottom: vs(10), fontSize: ms(20) }}
+            className=" font-medium text-[#0F0F0F]"
+          >
             Last Month Saving
           </Text>
           <Text
-            style={{ paddingBottom: vs(10) }}
-            className="text-lg  text-[#589E23] font-bold"
+            style={{ paddingBottom: vs(10), fontSize: ms(15) }}
+            className=" text-[#589E23] font-medium"
           >
             View Savings
           </Text>
@@ -195,14 +228,19 @@ export default function Page() {
       {/* Loan */}
       <View className="bg-[#fff] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg rounded-br-3xl">
         <View className="flex-row gap-7 items-center mx-7">
-          <FontAwesome size={38} name="money" color={"#589E23"} />
+          <FontAwesome size={30} name="money" color={"#589E23"} />
           <View>
-            <Text className="text-2xl text-[#0F0F0F]">Get A Loan</Text>
-            <Text className="text-[#708090]">Today, May 4</Text>
+            <Text style={{ fontSize: ms(20) }} className=" text-[#0F0F0F]">
+              Get A Loan
+            </Text>
+            <Text style={{ fontSize: ms(15) }} className="text-[#708090]">
+              {/* date today */}
+              {new Date().toLocaleDateString("en-US")}
+            </Text>
           </View>
         </View>
         <View className="mx-5">
-          <CustomButton size="$6" color="#fff">
+          <CustomButton size="$4" color="#fff">
             Apply For Loan
           </CustomButton>
         </View>

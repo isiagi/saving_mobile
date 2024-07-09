@@ -4,6 +4,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Bottom from "../../../components/ui/bottomSheet/BottomSheet";
 import TransactionSheet from "../../../components/ui/bottomSheet/TransactionSheet";
 import useFetch from "../../../hooks/useFetch";
+import {
+  verticalScale as vs,
+  moderateScale as ms,
+  horizontalScale as hs,
+} from "../Metrics";
 
 const TransactionUi = ({ path }) => {
   const [data, isLoading] = useFetch(path);
@@ -13,7 +18,15 @@ const TransactionUi = ({ path }) => {
       <StatusBar barStyle={"dark-content"} />
 
       <View className="flex-1">
-        <Text className="mx-5 text-[#708090] font-semibold pt-5">
+        <Text
+          style={{
+            fontSize: ms(16),
+            paddingTop: vs(20),
+            marginLeft: hs(20),
+            marginRight: hs(20),
+          }}
+          className=" text-[#708090] font-semibold"
+        >
           Most Recent Transaction
         </Text>
         <TransactionSheet data={data} isLoading={isLoading} />

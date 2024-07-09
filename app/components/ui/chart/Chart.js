@@ -74,7 +74,7 @@ const Chart = ({ chartData }) => {
     <LineChart
       data={data}
       width={screenWidth}
-      height={220}
+      height={180}
       chartConfig={chartConfig}
       formatYLabel={(value) => Math.round(value / 1000).toString()}
     />

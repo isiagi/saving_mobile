@@ -17,6 +17,11 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { usePathname } from "expo-router";
+import {
+  verticalScale as vs,
+  moderateScale as ms,
+  horizontalScale as hs,
+} from "../Metrics";
 
 const DATA = [
   {
@@ -41,26 +46,49 @@ const Item = ({ data }) => {
   console.log(data, "data");
   return (
     <View
-      style={styles.shadow}
-      className="p-5 mt-3 flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+      style={[
+        styles.shadow,
+        {
+          marginTop: vs(10),
+          paddingTop: vs(15),
+          paddingBottom: vs(15),
+          paddingLeft: hs(10),
+          paddingRight: hs(10),
+        },
+      ]}
+      className=" flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
     >
-      <View className="flex-row items-center gap-4">
-        <View className="bg-[#fff] w-10 h-10 rounded-full justify-center items-center">
-          <FontAwesome size={24} name="money" color={"#589E23"} />
+      <View className="flex-row items-center gap-3">
+        <View
+          style={{ width: hs(30), height: vs(30), borderRadius: ms(20) }}
+          className="bg-[#fff]  justify-center items-center"
+        >
+          <FontAwesome size={15} name="money" color={"#589E23"} />
         </View>
         <View>
-          <Text className="text-2xl text-[#fff]">
+          <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
             {data.member_name || data.member_id.first_name}
           </Text>
-          <Text className="text-[#fff] text-lg pt-1">
+          <Text
+            style={{ fontSize: ms(15), paddingTop: vs(5) }}
+            className="text-[#ededed]"
+          >
             {data.date_of_payment}
           </Text>
         </View>
       </View>
 
       <View>
-        <Text className="text-xl text-[#fff]">Amount</Text>
-        <Text className="text-[#fff] text-xl pt-1">{data.amount}</Text>
+        <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
+          Amount
+        </Text>
+        <Text
+          style={{ fontSize: ms(16), paddingTop: vs(5) }}
+          className="text-[#ededed]"
+        >
+          {/* remove decimals */}
+          {parseFloat(data.amount).toFixed(2)}
+        </Text>
       </View>
     </View>
   );
