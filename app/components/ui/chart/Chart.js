@@ -17,22 +17,25 @@ const Chart = ({ chartData }) => {
     const newData = [];
     const newLabels = [];
 
-    chartData.forEach(({ count, week }) => {
-      if (typeof count === "number") {
-        newData.push(count);
+    chartData.forEach(({ total_amount, month }) => {
+      if (
+        typeof total_amount === "string" ||
+        typeof total_amount === "number"
+      ) {
+        newData.push(total_amount);
       } else {
-        console.warn("Invalid count value:", count);
+        console.warn("Invalid count value:", total_amount);
       }
 
-      if (typeof week === "string" || typeof week === "number") {
-        newLabels.push(week);
+      if (typeof month === "string" || typeof month === "number") {
+        newLabels.push(month);
       } else {
-        console.warn("Invalid week value:", week);
+        console.warn("Invalid month value:", month);
       }
     });
 
-    setData(newData.reverse());
-    setLabel(newLabels.reverse());
+    setData(newData);
+    setLabel(newLabels);
 
     // Debugging logs
     console.log("Processed data:", newData);
@@ -48,7 +51,7 @@ const Chart = ({ chartData }) => {
         strokeWidth: 2,
       },
     ],
-    legend: ["Savings in 000 / week"],
+    legend: ["Savings in 000 / month"],
   };
 
   const chartConfig = {

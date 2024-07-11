@@ -79,7 +79,7 @@ export default function Page() {
   const url = [
     { url: `user_profile/profile/${authId}` },
     { url: "saving" },
-    { url: "saving/data/2024/7" },
+    { url: "saving/data/" },
   ];
 
   // todo: make { url: "saving/data/2024/7" }, match previous month data
