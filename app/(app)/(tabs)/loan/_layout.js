@@ -19,7 +19,7 @@ export default function Layout() {
           options={{
             headerRight: () => (
               <TouchableHighlight
-                // onPress={() => router.push("/(app)/(tabs)/loan/payment")}
+                onPress={() => router.push("/(app)/(tabs)/loan/getLoan")}
                 className="pr-5"
               >
                 <Text className="text-[#589E23] font-bold">GET LOAN</Text>
@@ -36,15 +36,6 @@ export default function Layout() {
             // ),
             unmountOnBlur: true,
           }}
-          listeners={({ navigation }) => ({
-            tabPress: (e) => {
-              e.preventDefault();
-              navigation.push("getLoan");
-            },
-            focus: () => {
-              navigation.navigate("getLoan");
-            },
-          })}
         />
         <Drawer.Screen
           name="transaction"
@@ -66,7 +57,6 @@ export default function Layout() {
             unmountOnBlur: true,
           }}
         />
-
         <Drawer.Screen
           name="getLoan"
           options={{
@@ -74,15 +64,17 @@ export default function Layout() {
             headerTitleAlign: "center",
             drawerLabel: "Get Loan",
             headerTintColor: "#0F0F0F",
+            unmountOnBlur: true,
 
             headerRight: () => (
-              <Pressable onPress={() => router.replace("/(app)/(tabs)/loan")}>
-                <Text className="text-[#589E23] font-bold mr-5">Cancel</Text>
-              </Pressable>
+              <TouchableHighlight
+                onPress={() => router.push("/(app)/(tabs)/loan")}
+                className="pr-5"
+              >
+                <Text className="text-[#589E23] font-bold">Cancel</Text>
+              </TouchableHighlight>
             ),
           }}
-
-          // button back to loan index
         />
       </Drawer>
     </GestureHandlerRootView>

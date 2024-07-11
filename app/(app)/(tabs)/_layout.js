@@ -52,6 +52,11 @@ export default function TabLayout() {
             <FontAwesome size={24} name="money" color={color} />
           ),
         }}
+        listeners={({ navigation }) => ({
+          focus: () => {
+            navigation.navigate("loan");
+          },
+        })}
       />
       <Tabs.Screen
         name="profile"

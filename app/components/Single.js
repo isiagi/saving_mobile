@@ -23,12 +23,19 @@ const Page = ({ title, data, isLoading }) => {
 
   const tabPath = usePathname();
 
-  const toRoute = tabPath.split("/")[1];
+  const toRoute =
+    tabPath === "/loan/payment" ? tabPath.split("/")[2] : tabPath.split("/")[1];
 
   useEffect(() => {
     if (data && data.length > 0) {
+      // if toRoute is loan,then use curr.remaining_amount
+
+      // if toRoute is saving,then use curr.amount
+      console.log(data, "data");
       const total = data.reduce(
-        (acc, curr) => acc + parseFloat(curr.amount),
+        (acc, curr) =>
+          acc +
+          parseFloat(toRoute === "loan" ? curr.remaining_amount : curr.amount),
         0
       );
       setTotalAmount(total);
@@ -36,6 +43,14 @@ const Page = ({ title, data, isLoading }) => {
       setTotalAmount(0);
     }
   }, [data]);
+
+  // currency format
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "UGX",
+  });
+
+  console.log(totalAmount, "total amount");
 
   return (
     <View className="flex-1 overflow-hidden">
@@ -55,7 +70,7 @@ const Page = ({ title, data, isLoading }) => {
 
         <View
           style={{ paddingTop: vs(20), paddingBottom: vs(20) }}
-          className="bg-[#589E23] self-center p-5 overflow-hidden w-[60%] mx-auto my-0 rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+          className="bg-[#589E23] self-center overflow-hidden w-[65%] mx-auto my-0 rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
         >
           <View className="flex-row justify-center items-center ">
             <View>
@@ -63,13 +78,14 @@ const Page = ({ title, data, isLoading }) => {
                 style={{ fontSize: ms(15) }}
                 className="text-white text-center"
               >
-                {title} Balance
+                {title !== "Loans" ? `${title} Total` : `${title} Balance`}
               </Text>
               <Text
-                style={{ fontSize: ms(25) }}
-                className="text-white text-3xl mt-2"
+                style={{ fontSize: ms(25), marginTop: vs(5) }}
+                className="text-white"
               >
-                {totalAmount} UGX
+                {/* currency */}
+                {formatter.format(totalAmount)}
               </Text>
             </View>
             {/* <View className="">
@@ -98,13 +114,22 @@ const Page = ({ title, data, isLoading }) => {
           <Text style={{ fontSize: ms(20) }} className=" text-[#0F0F0F]">
             Previous {title}
           </Text>
-          <Text style={{ fontSize: ms(15) }} className="text-[#708090]">
-            Today, May 4
+          <Text
+            style={{ fontSize: ms(15), paddingTop: vs(5) }}
+            className="text-[#708090]"
+          >
+            Today, {new Date().toLocaleDateString("en-US")}
           </Text>
         </View>
         <View>
           <Pressable
-            onPress={() => router.navigate(`/(tabs)/${toRoute}/transaction`)}
+            onPress={() =>
+              router.navigate(
+                `/(tabs)/${
+                  tabPath === "/loan/payment" ? "loan" : toRoute
+                }/transaction`
+              )
+            }
             style={({ pressed }) => [
               {
                 backgroundColor: pressed ? "red" : "white",

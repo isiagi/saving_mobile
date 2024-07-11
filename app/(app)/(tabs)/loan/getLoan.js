@@ -132,8 +132,8 @@ const Page = () => {
         <YStack width={"100%"} minHeight={200} overflow="hidden" gap="$2">
           <YStack>
             <YStack>
-              {formConfig.map((field) => (
-                <React.Fragment key={field.name}>
+              {formConfig.map((field, i) => (
+                <React.Fragment key={i}>
                   <Label color="#0F0F0F" htmlFor={field.name}>
                     {field.label}
                   </Label>

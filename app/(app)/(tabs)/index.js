@@ -120,6 +120,20 @@ export default function Page() {
   const data = dataz[0];
   // raiseData(data);
 
+  // saving total
+  const savingTotal = dataz[0] && dataz[1];
+  //reduce the amount key
+  const savings =
+    savingTotal &&
+    savingTotal.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);
+
+  console.log(savings, "savings");
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "UGX",
+  });
+
   const image_url = data[0] && data[0].image_url;
   return (
     <View className="flex-1">
@@ -139,10 +153,10 @@ export default function Page() {
             >
               <View>
                 <View className="flex-row items-center justify-center gap-1">
-                  <Text style={{ fontSize: ms(18) }}>Hello</Text>
+                  <Text style={{ fontSize: ms(25) }}>Hello</Text>
                   <Text
                     style={{ fontSize: ms(25) }}
-                    className="text-3xl font-bold  text-[#589E23]"
+                    className=" font-bold  text-[#589E23]"
                   >
                     {data[0] && data[0].user.last_name}
                   </Text>
@@ -184,7 +198,7 @@ export default function Page() {
                 style={{ fontSize: ms(25), marginTop: vs(10) }}
                 className=" text-[#589E23] font-bold "
               >
-                300000 shs
+                {formatter.format(savings)}
               </Text>
             </View>
             <View>
@@ -234,7 +248,7 @@ export default function Page() {
       />
       {/* Loan */}
       <View className="bg-[#fff] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg rounded-br-3xl">
-        <View className="flex-row gap-7 items-center mx-7">
+        <View style={{ gap: ms(15) }} className="flex-row  items-center mx-7">
           <FontAwesome size={30} name="money" color={"#589E23"} />
           <View>
             <Text style={{ fontSize: ms(20) }} className=" text-[#0F0F0F]">
@@ -242,15 +256,15 @@ export default function Page() {
             </Text>
             <Text style={{ fontSize: ms(15) }} className="text-[#708090]">
               {/* date today */}
-              {new Date().toLocaleDateString("en-US")}
+              Today, {new Date().toLocaleDateString("en-US")}
             </Text>
           </View>
         </View>
         <View style={{ marginLeft: hs(10), marginRight: hs(10) }}>
           <CustomButton
             size="$4"
-            onPress={() => router.push("/(app)/(tabs)/loan/payment")}
             color="#fff"
+            onPress={() => router.push("loan/getLoan")}
           >
             Apply For Loan
           </CustomButton>

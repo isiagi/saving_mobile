@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import {
   BottomSheetModal,
@@ -53,14 +54,15 @@ const Item = ({ data }) => {
             key !== "type" &&
             key !== "plan" &&
             key !== "user" &&
-            key !== "granteers"
+            key !== "granteers" &&
+            key !== "saving_id"
         )
         .map((key) => {
           const value = data[key];
           const isObject = typeof value === "object" && value !== null;
 
           return (
-            <View key={key}>
+            <View key={key} style={{ paddingLeft: hs(5), paddingRight: hs(5) }}>
               <Text style={{ fontSize: ms(15) }} className="text-[#fff]">
                 {key.replace(/_/g, " ")}
               </Text>
@@ -146,28 +148,35 @@ const Bottom = ({ data, isLoading }) => {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <View>
-                {Object.keys(modalData).map((key) => {
-                  const value = data[key];
-                  const isObject = typeof value === "object" && value !== null;
+              <ScrollView className="flex-1">
+                {Object.keys(modalData)
+                  .filter((key) => key !== "user_id" && key !== "id")
+                  .map((key) => {
+                    const value = modalData[key];
+                    const isObject =
+                      typeof value === "object" && value !== null;
 
-                  return (
-                    <View key={key}>
-                      <Text
-                        style={{ fontSize: ms(15) }}
-                        className="text-[#fff]"
+                    return (
+                      <View
+                        key={key}
+                        className="flex-row flex-1 gap-1 justify-between"
+                        style={{ paddingTop: vs(15) }}
                       >
-                        {key.replace(/_/g, " ")}
-                      </Text>
-                      <Text className="text-[#d3d3d3]">
-                        {isObject && value.first_name && value.last_name
-                          ? `${value.first_name} ${value.last_name}`
-                          : value}
-                      </Text>
-                    </View>
-                  );
-                })}
-              </View>
+                        <Text
+                          style={{ fontSize: ms(15) }}
+                          className="text-[#000]"
+                        >
+                          {key.replace(/_/g, " ")}:
+                        </Text>
+                        <Text className="text-[#d3d3d3]">
+                          {isObject && value.first_name && value.last_name
+                            ? `${value.first_name} ${value.last_name}`
+                            : value}
+                        </Text>
+                      </View>
+                    );
+                  })}
+              </ScrollView>
 
               {/* <View className="flex-row justify-between pt-4">
                 <Text className="text-lg text-[#0F0F0F]">Membership ID : </Text>

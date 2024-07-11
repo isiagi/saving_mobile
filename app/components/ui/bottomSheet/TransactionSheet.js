@@ -70,7 +70,8 @@ const Item = ({ data }) => (
           key !== "type" &&
           key !== "user" &&
           key !== "granteers" &&
-          key !== "plan"
+          key !== "plan" &&
+          key !== "saving_id"
       )
       .map((key) => {
         const value = data[key];
@@ -151,7 +152,34 @@ const TransactionSheet = ({ data, isLoading }) => {
           >
             <BottomSheetView style={styles.contentContainer}>
               <ScrollView className="flex-1">
-                <View>
+                {Object.keys(modalData)
+                  .filter((key) => key !== "user_id" && key !== "id")
+                  .map((key) => {
+                    const value = modalData[key];
+                    const isObject =
+                      typeof value === "object" && value !== null;
+
+                    return (
+                      <View
+                        key={key}
+                        className="flex-row flex-1 gap-1 justify-between"
+                        style={{ paddingTop: vs(20) }}
+                      >
+                        <Text
+                          style={{ fontSize: ms(15) }}
+                          className="text-[#000]"
+                        >
+                          {key.replace(/_/g, " ")}:
+                        </Text>
+                        <Text className="text-[#d3d3d3]">
+                          {isObject && value.first_name && value.last_name
+                            ? `${value.first_name} ${value.last_name}`
+                            : value}
+                        </Text>
+                      </View>
+                    );
+                  })}
+                {/* <View>
                   {modalData &&
                     Object.keys(modalData).map(
                       (key) =>
@@ -172,7 +200,7 @@ const TransactionSheet = ({ data, isLoading }) => {
                           </View>
                         )
                     )}
-                </View>
+                </View> */}
                 {/* <Text>Awesome 🎉</Text> */}
               </ScrollView>
             </BottomSheetView>

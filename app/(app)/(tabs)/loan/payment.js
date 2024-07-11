@@ -1,11 +1,12 @@
-import { View, Text } from "react-native";
 import React from "react";
+
+import TransactionUi from "../../../components/ui/bottomSheet/TransactionUi";
 import useFetch from "../../../hooks/useFetch";
 import PageComponent from "../../../components/Single";
-import TransactionUi from "../../../components/ui/bottomSheet/TransactionUi";
 
 const Page = () => {
-  return <TransactionUi path="payment" />;
+  const [data, isLoading] = useFetch("payment");
+  return <PageComponent title={"Payments"} data={data} isLoading={isLoading} />;
 };
 
 export default Page;
