@@ -23,25 +23,6 @@ import {
   horizontalScale as hs,
 } from "../Metrics";
 
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91ab97f63",
-    title: "Second Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a9f8-fbd91ab97f63",
-    title: "Second Item",
-  },
-];
-
 const Item = ({ data }) => {
   console.log(data, "data");
   return (
@@ -49,47 +30,48 @@ const Item = ({ data }) => {
       style={[
         styles.shadow,
         {
-          marginTop: vs(10),
+          // marginTop: vs(15),
           paddingTop: vs(15),
           paddingBottom: vs(15),
           paddingLeft: hs(10),
           paddingRight: hs(10),
+          marginBottom: vs(15),
         },
       ]}
-      className=" flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+      className=" flex-row items-center gap-2 justify-between flex-wrap rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
     >
-      <View className="flex-row items-center gap-3">
-        <View
-          style={{ width: hs(30), height: vs(30), borderRadius: ms(20) }}
-          className="bg-[#fff]  justify-center items-center"
-        >
-          <FontAwesome size={15} name="money" color={"#589E23"} />
-        </View>
-        <View>
-          <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
-            {data.member_name || data.member_id.first_name}
-          </Text>
-          <Text
-            style={{ fontSize: ms(15), paddingTop: vs(5) }}
-            className="text-[#ededed]"
-          >
-            {data.date_of_payment}
-          </Text>
-        </View>
-      </View>
+      {/* filter out null values, user_id, id, account_number, created_at, updated_at, type, plan, user, granteers */}
 
-      <View>
-        <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
-          Amount
-        </Text>
-        <Text
-          style={{ fontSize: ms(16), paddingTop: vs(5) }}
-          className="text-[#ededed]"
-        >
-          {/* remove decimals */}
-          {parseFloat(data.amount).toFixed(2)}
-        </Text>
-      </View>
+      {Object.keys(data)
+        .filter(
+          (key) =>
+            key !== "user_id" &&
+            key !== "id" &&
+            key !== "account_number" &&
+            key !== "created_at" &&
+            key !== "updated_at" &&
+            key !== "type" &&
+            key !== "plan" &&
+            key !== "user" &&
+            key !== "granteers"
+        )
+        .map((key) => {
+          const value = data[key];
+          const isObject = typeof value === "object" && value !== null;
+
+          return (
+            <View key={key}>
+              <Text style={{ fontSize: ms(15) }} className="text-[#fff]">
+                {key.replace(/_/g, " ")}
+              </Text>
+              <Text className="text-[#d3d3d3]">
+                {isObject && value.first_name && value.last_name
+                  ? `${value.first_name} ${value.last_name}`
+                  : value}
+              </Text>
+            </View>
+          );
+        })}
     </View>
   );
 };
@@ -143,7 +125,7 @@ const Bottom = ({ data, isLoading }) => {
             title="Present Modal"
             color="black"
           /> */}
-          <View className="mx-5">
+          <View style={{ marginLeft: hs(10), marginRight: hs(10) }}>
             <FlatList
               data={data && data}
               renderItem={({ item }) => (
@@ -164,37 +146,60 @@ const Bottom = ({ data, isLoading }) => {
             onChange={handleSheetChanges}
           >
             <BottomSheetView style={styles.contentContainer}>
-              <View className="flex-row justify-between pt-4">
+              <View>
+                {Object.keys(modalData).map((key) => {
+                  const value = data[key];
+                  const isObject = typeof value === "object" && value !== null;
+
+                  return (
+                    <View key={key}>
+                      <Text
+                        style={{ fontSize: ms(15) }}
+                        className="text-[#fff]"
+                      >
+                        {key.replace(/_/g, " ")}
+                      </Text>
+                      <Text className="text-[#d3d3d3]">
+                        {isObject && value.first_name && value.last_name
+                          ? `${value.first_name} ${value.last_name}`
+                          : value}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+
+              {/* <View className="flex-row justify-between pt-4">
                 <Text className="text-lg text-[#0F0F0F]">Membership ID : </Text>
                 <Text className="text-lg text-[#708090]">
                   {modalData && tabPath === "/loan" ? modalData.member_id : ""}
                 </Text>
-              </View>
+              </View> */}
 
-              <View className="flex-row justify-between py-4">
+              {/* <View className="flex-row justify-between py-4">
                 <Text className="text-lg text-[#0F0F0F]">Member Name: </Text>
                 <Text className="text-lg text-[#708090]">
                   {modalData && tabPath === "/loan"
                     ? modalData.member_name
                     : ""}
                 </Text>
-              </View>
+              </View> */}
 
-              <View className="flex-row justify-between pb-4">
+              {/* <View className="flex-row justify-between pb-4">
                 <Text className="text-lg text-[#0F0F0F]">Amount : </Text>
                 <Text className="text-lg text-[#708090]">
                   {modalData && modalData.amount}
                 </Text>
-              </View>
+              </View> */}
 
-              <View className="flex-row justify-between pb-4">
+              {/* <View className="flex-row justify-between pb-4">
                 <Text className="text-lg text-[#0F0F0F]">
                   Data of Payment :{" "}
                 </Text>
                 <Text className="text-lg text-[#708090]">
                   {modalData && modalData.date_of_payment}
                 </Text>
-              </View>
+              </View> */}
               <Text>Awesome 🎉</Text>
             </BottomSheetView>
           </BottomSheetModal>

@@ -22,7 +22,16 @@ import {
   moderateScale as ms,
   horizontalScale as hs,
 } from "../../components/ui/Metrics";
-import { Form, Input, Label, YStack, Button, styled, Spinner } from "tamagui";
+import {
+  Form,
+  Input,
+  Label,
+  YStack,
+  Button,
+  styled,
+  Spinner,
+  Switch,
+} from "tamagui";
 
 const formConfig = [
   { name: "first_name", label: "First Name", placeholder: "First Name" },
@@ -32,6 +41,7 @@ const formConfig = [
   { name: "residence", label: "Residence", placeholder: "Residence" },
   { name: "gender", label: "Gender", placeholder: "Gender" },
   { name: "telephone", label: "Telephone", placeholder: "Telephone" },
+  { name: "nin", label: "NIN", placeholder: "NIN" },
   // { name: "image_url", label: "Image URL", placeholder: "Image URL" },
 ];
 
@@ -59,6 +69,8 @@ const Page = () => {
     residence: "",
     gender: "",
     telephone: "",
+    nin: "",
+    is_staff: false,
     image_url: {},
   });
   const [loading, setLoading] = useState(false);
@@ -73,7 +85,9 @@ const Page = () => {
         occupation: userData[0].occupation || "",
         residence: userData[0].residence || "",
         telephone: userData[0].telephone || "",
+        nin: userData[0].nin || "",
         image_url: userData[0].image_url || {},
+        is_staff: userData[0].user.is_staff || false,
       });
     }
   }, [userData]);
@@ -111,6 +125,7 @@ const Page = () => {
   formData.append("residence", formState.residence);
   formData.append("gender", formState.gender);
   formData.append("telephone", formState.telephone);
+  formData.append("nin", formState.nin);
   formData.append("image_url", {
     uri: formState.image_url.uri,
     type: formState.image_url.mimeType,
@@ -123,7 +138,8 @@ const Page = () => {
         `user_profile/${userData[0] && userData[0].id}`,
         formData
       );
-      console.log("form", formData);
+
+      router.push("/(app)/(tabs)/profile");
     } catch (error) {
       console.error(error.response?.data, error.toJSON());
     } finally {
@@ -190,6 +206,12 @@ const Page = () => {
                   </React.Fragment>
                 ))}
               </YStack>
+              {/* <YStack>
+                <Label color="#0F0F0F">Admin</Label>
+                <Switch size="$4" defaultChecked={false}>
+                  <Switch.Thumb animation="bouncy" />
+                </Switch>
+              </YStack> */}
             </YStack>
           </YStack>
           <View className="mb-7">
@@ -197,10 +219,15 @@ const Page = () => {
               <Image
                 source={{
                   uri:
-                    `${formState.image_url}` ||
+                    `${formState.image_url.uri}` ||
                     "https://reactnative.dev/img/tiny_logo.png",
                 }}
-                style={{ width: "100%", height: vs(150), marginBottom: vs(10) }}
+                style={{
+                  width: "100%",
+                  height: vs(200),
+                  marginBottom: vs(12),
+                  marginTop: vs(12),
+                }}
               />
             )}
 

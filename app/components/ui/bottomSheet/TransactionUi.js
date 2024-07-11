@@ -24,6 +24,7 @@ const TransactionUi = ({ path }) => {
             paddingTop: vs(20),
             marginLeft: hs(20),
             marginRight: hs(20),
+            marginBottom: vs(20),
           }}
           className=" text-[#708090] font-semibold"
         >

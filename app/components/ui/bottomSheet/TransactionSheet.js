@@ -47,52 +47,48 @@ const Item = ({ data }) => (
     style={[
       styles.shadow,
       {
-        marginTop: vs(10),
-        paddingTop: vs(20),
-        paddingBottom: vs(20),
+        // marginTop: vs(15),
+        paddingTop: vs(15),
+        paddingBottom: vs(15),
         paddingLeft: hs(10),
         paddingRight: hs(10),
-        marginLeft: hs(10),
-        marginRight: hs(10),
+        marginBottom: vs(15),
       },
     ]}
-    className=" flex-row items-center gap-4 justify-between rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+    className=" flex-row items-center gap-2 justify-between flex-wrap rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
   >
-    <View className="flex-row items-center gap-3">
-      <View
-        style={{ width: hs(30), height: vs(30), borderRadius: ms(20) }}
-        className="bg-white  justify-center items-center"
-      >
-        <FontAwesome size={15} name="dollar" color={"#D18A0D"} />
-      </View>
-      {/* <View>
-        <Text className="text-xl text-[#fff]">{data.member_name}</Text>
-        <Text className="text-[#d3d3d3]">{data.date_of_payment}</Text>
-      </View> */}
-      <View>
-        {Object.keys(data).map(
-          (key) =>
-            key === "date_of_payment" ||
-            (key === "member_id" && (
-              <View key={key}>
-                <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
-                  {key.replace(/_/g, " ")}
-                </Text>
-                <Text className="text-[#d3d3d3]">{data[key]}</Text>
-              </View>
-            ))
-        )}
-      </View>
-    </View>
+    {/* filter out null values, user_id, id, account_number, created_at, updated_at, plan, user, granteers, type */}
 
-    <View>
-      <Text style={{ fontSize: ms(15) }} className=" text-[#fff]">
-        Amount
-      </Text>
-      <Text style={{ fontSize: ms(16) }} className="text-[#d3d3d3]">
-        {data.amount}
-      </Text>
-    </View>
+    {Object.keys(data)
+      .filter(
+        (key) =>
+          key !== "user_id" &&
+          key !== "id" &&
+          key !== "account_number" &&
+          key !== "created_at" &&
+          key !== "updated_at" &&
+          key !== "type" &&
+          key !== "user" &&
+          key !== "granteers" &&
+          key !== "plan"
+      )
+      .map((key) => {
+        const value = data[key];
+        const isObject = typeof value === "object" && value !== null;
+
+        return (
+          <View key={key}>
+            <Text style={{ fontSize: ms(15) }} className="text-[#fff]">
+              {key.replace(/_/g, " ")}
+            </Text>
+            <Text className="text-[#d3d3d3]">
+              {isObject && value.first_name && value.last_name
+                ? `${value.first_name} ${value.last_name}`
+                : value}
+            </Text>
+          </View>
+        );
+      })}
   </View>
 );
 
@@ -190,6 +186,8 @@ const TransactionSheet = ({ data, isLoading }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginLeft: hs(10),
+    marginRight: hs(10),
   },
   contentContainer: {
     flex: 1,

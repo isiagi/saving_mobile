@@ -12,6 +12,7 @@ export default function Layout() {
           drawerActiveTintColor: "#fff",
           drawerInactiveTintColor: "#0F0F0F",
         }}
+        initialRouteName="index"
       >
         <Drawer.Screen
           name="index"
@@ -35,6 +36,15 @@ export default function Layout() {
             // ),
             unmountOnBlur: true,
           }}
+          listeners={({ navigation }) => ({
+            tabPress: (e) => {
+              e.preventDefault();
+              navigation.push("getLoan");
+            },
+            focus: () => {
+              navigation.navigate("getLoan");
+            },
+          })}
         />
         <Drawer.Screen
           name="transaction"
@@ -55,6 +65,24 @@ export default function Layout() {
             headerTintColor: "#0F0F0F",
             unmountOnBlur: true,
           }}
+        />
+
+        <Drawer.Screen
+          name="getLoan"
+          options={{
+            headerTitle: "Get Loan",
+            headerTitleAlign: "center",
+            drawerLabel: "Get Loan",
+            headerTintColor: "#0F0F0F",
+
+            headerRight: () => (
+              <Pressable onPress={() => router.replace("/(app)/(tabs)/loan")}>
+                <Text className="text-[#589E23] font-bold mr-5">Cancel</Text>
+              </Pressable>
+            ),
+          }}
+
+          // button back to loan index
         />
       </Drawer>
     </GestureHandlerRootView>

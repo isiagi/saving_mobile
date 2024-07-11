@@ -87,7 +87,7 @@ const Page = () => {
         >
           <View className="text-center items-center">
             <Image
-              style={{ width: hs(100), height: vs(100), borderRadius: ms(50) }}
+              style={{ width: hs(100), height: vs(100), borderRadius: ms(25) }}
               source={{
                 uri: image_url || "https://reactnative.dev/img/tiny_logo.png",
               }}
@@ -169,7 +169,7 @@ const Page = () => {
                 NIN:{" "}
               </Text>
               <Text style={{ fontSize: ms(17) }} className=" text-[#708090]">
-                3VvYh@example.com
+                {data[0] && data[0].nin}
               </Text>
             </View>
 

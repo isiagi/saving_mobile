@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.3.3",
+    "@emailjs/react-native": "^4.2.2",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo/metro-runtime": "~3.2.1",
     "@gorhom/bottom-sheet": "^4.6.1",

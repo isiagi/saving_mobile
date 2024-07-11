@@ -1,5 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, router } from "expo-router";
+import { Link, router, useRouter } from "expo-router";
 
 import { useContext, useEffect, useState } from "react";
 import {
@@ -72,6 +72,8 @@ export default function Page() {
   const [modalVisible, setModalVisible] = useState(false);
   const { authId } = useContext(AuthContext);
   const { raiseData, setLoading } = useContext(DataContext);
+
+  const router = useRouter();
 
   // const [data, isLoading] = useGetById("user_profile/profile", authId);
   const url = [
@@ -151,10 +153,15 @@ export default function Page() {
               </View>
 
               <Image
-                style={{ width: hs(40), height: vs(40) }}
+                style={{
+                  width: hs(50),
+                  height: vs(50),
+                  borderRadius: ms(25),
+                }}
                 source={{
                   uri: image_url || "https://reactnative.dev/img/tiny_logo.png",
                 }}
+                alt="image"
               />
             </View>
           </Pressable>
@@ -239,8 +246,12 @@ export default function Page() {
             </Text>
           </View>
         </View>
-        <View className="mx-5">
-          <CustomButton size="$4" color="#fff">
+        <View style={{ marginLeft: hs(10), marginRight: hs(10) }}>
+          <CustomButton
+            size="$4"
+            onPress={() => router.push("/(app)/(tabs)/loan/payment")}
+            color="#fff"
+          >
             Apply For Loan
           </CustomButton>
         </View>
