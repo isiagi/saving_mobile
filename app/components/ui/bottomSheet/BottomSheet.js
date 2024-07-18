@@ -32,8 +32,8 @@ const Item = ({ data }) => {
         styles.shadow,
         {
           // marginTop: vs(15),
-          paddingTop: vs(15),
-          paddingBottom: vs(15),
+          paddingTop: vs(20),
+          paddingBottom: vs(20),
           paddingLeft: hs(10),
           paddingRight: hs(10),
           marginBottom: vs(15),
@@ -55,7 +55,8 @@ const Item = ({ data }) => {
             key !== "plan" &&
             key !== "user" &&
             key !== "granteers" &&
-            key !== "saving_id"
+            key !== "saving_id" &&
+            key !== "member_id"
         )
         .map((key) => {
           const value = data[key];

@@ -71,7 +71,8 @@ const Item = ({ data }) => (
           key !== "user" &&
           key !== "granteers" &&
           key !== "plan" &&
-          key !== "saving_id"
+          key !== "saving_id" &&
+          key !== "member_id"
       )
       .map((key) => {
         const value = data[key];

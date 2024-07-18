@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable, Alert } from "react-native";
+import { View, Text, TextInput, Pressable, Alert, Image } from "react-native";
 import React, { useContext, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../store/ctx";
@@ -65,7 +65,9 @@ const Login = () => {
     <View className="flex-1 px-5 bg-white">
       <SafeAreaView />
       <View style={{ marginTop: vs(50) }}>
-        <Text className="text-3xl">Welcome To</Text>
+        <Text style={{ fontSize: ms(25) }} className="text-yellow-300">
+          Welcome To
+        </Text>
         <Text
           style={{ fontSize: ms(30), paddingTop: vs(10) }}
           className="font-semibold text-[#589E23]"
@@ -73,51 +75,58 @@ const Login = () => {
           Agalyawamu App
         </Text>
       </View>
-      <View className="justify-center flex-1">
-        <Text
-          style={{ fontSize: ms(20) }}
-          className="text-center font-semibold text-slate-800"
-        >
-          Login
-        </Text>
-
-        <Form onSubmit={handleLogIn}>
-          <YStack
-            width={"100%"}
-            minHeight={200}
-            overflow="hidden"
-            space="$2"
-            padding="$2"
-            marginTop="$2"
-            gap="$2"
-            backgroundColor="#fff"
+      <View className="flex-1" style={{ marginTop: vs(60) }}>
+        <View className="text-center mx-auto">
+          <Image
+            source={require("../../../assets/ada1.png")}
+            style={{ width: 150, height: 150 }}
+          />
+        </View>
+        <View style={{ marginTop: vs(20) }}>
+          <Text
+            style={{ fontSize: ms(20), paddingBottom: vs(10) }}
+            className="text-center font-semibold text-slate-800"
           >
-            <Input
+            Login
+          </Text>
+
+          <Form onSubmit={handleLogIn}>
+            <YStack
+              width={"100%"}
+              minHeight={200}
+              overflow="hidden"
+              space="$2"
+              padding="$2"
+              marginTop="$2"
+              gap="$2"
               backgroundColor="#fff"
-              padding="$4"
-              size={"$6"}
-              onChangeText={onChangeText}
-              value={text}
-              placeholder={"Membership ID"}
-              color="#589E23"
-            />
-            <Input
-              backgroundColor="#fff"
-              padding="$4"
-              size={"$6"}
-              onChangeText={onPassword}
-              value={password}
-              placeholder={"Password"}
-              color="#589E23"
-            />
-            <Pressable
-              style={{ marginBottom: vs(10) }}
-              onPress={() => router.navigate("/(app)/member")}
             >
-              <Text className="text-[#589E23]">Or Register</Text>
-            </Pressable>
-          </YStack>
-          {/* <View className="mt-8">
+              <Input
+                backgroundColor="#fff"
+                padding="$4"
+                size={"$6"}
+                onChangeText={onChangeText}
+                value={text}
+                placeholder={"Membership ID"}
+                color="#589E23"
+              />
+              <Input
+                backgroundColor="#fff"
+                padding="$4"
+                size={"$6"}
+                onChangeText={onPassword}
+                value={password}
+                placeholder={"Password"}
+                color="#589E23"
+              />
+              <Pressable
+                style={{ marginBottom: vs(10) }}
+                onPress={() => router.navigate("/(app)/member")}
+              >
+                <Text className="text-[#589E23]">Or Register</Text>
+              </Pressable>
+            </YStack>
+            {/* <View className="mt-8">
             <TextInput
               className="border-[1px] py-4 px-2 mb-7 text-xl"
               style={""}
@@ -141,21 +150,22 @@ const Login = () => {
               </Pressable>
             </View>
           </View> */}
-          {/* <TouchableOpacity className="bg-[#D18A0D]" onPress={handleLogIn}>
+            {/* <TouchableOpacity className="bg-[#D18A0D]" onPress={handleLogIn}>
           <Text className="text-center text-white py-4 text-xl">Login</Text>
         </TouchableOpacity> */}
-          <Form.Trigger
-            asChild
-            disabled={text === "" || password === "" || status !== "off"}
-          >
-            <CustomButton
-              icon={status === "submitting" ? () => <Spinner /> : undefined}
-              size="$5"
+            <Form.Trigger
+              asChild
+              disabled={text === "" || password === "" || status !== "off"}
             >
-              Log In
-            </CustomButton>
-          </Form.Trigger>
-        </Form>
+              <CustomButton
+                icon={status === "submitting" ? () => <Spinner /> : undefined}
+                size="$5"
+              >
+                Log In
+              </CustomButton>
+            </Form.Trigger>
+          </Form>
+        </View>
       </View>
       {/* <Button
         onPress={() => {

@@ -33,9 +33,9 @@ const AuthContextProvider = ({ children }) => {
     fetchToken();
   }, []);
 
-  function authenticate(token, id) {
-    AsyncStorage.setItem("authToken", token);
-    AsyncStorage.setItem("authId", `${id}`);
+  async function authenticate(token, id) {
+    await AsyncStorage.setItem("authToken", token);
+    await AsyncStorage.setItem("authId", `${id}`);
     setAuthToken(token);
     setAuthId(id);
   }

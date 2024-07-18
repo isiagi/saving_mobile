@@ -141,7 +141,7 @@ export default function Page() {
       <SafeAreaView>
         <StatusBar barStyle={"dark-content"} />
         <View>
-          <Pressable onPress={() => setModalVisible(!modalVisible)}>
+          <Pressable>
             <View
               style={{
                 paddingTop: vs(10),
@@ -161,7 +161,10 @@ export default function Page() {
                     {data[0] && data[0].user.last_name}
                   </Text>
                 </View>
-                <Text style={{ fontSize: ms(15) }} className="text-[#708090]">
+                <Text
+                  style={{ fontSize: ms(15), marginTop: vs(5) }}
+                  className="text-[#708090]"
+                >
                   Have a nice day!
                 </Text>
               </View>
@@ -247,23 +250,45 @@ export default function Page() {
         setModalVisible={setModalVisible}
       />
       {/* Loan */}
-      <View className="bg-[#fff] mx-5 py-5 gap-5 rounded-tl-3xl rounded-tr-lg rounded-br-3xl">
-        <View style={{ gap: ms(15) }} className="flex-row  items-center mx-7">
+      <View
+        style={{
+          paddingTop: vs(15),
+          paddingBottom: vs(40),
+          marginLeft: hs(10),
+          marginRight: hs(10),
+        }}
+        className="bg-[#fff]  gap-5 rounded-tl-3xl rounded-tr-lg rounded-br-3xl"
+      >
+        <View
+          style={{ gap: ms(15), marginLeft: hs(20), marginRight: hs(20) }}
+          className="flex-row  items-center "
+        >
           <FontAwesome size={30} name="money" color={"#589E23"} />
           <View>
             <Text style={{ fontSize: ms(20) }} className=" text-[#0F0F0F]">
               Get A Loan
             </Text>
-            <Text style={{ fontSize: ms(15) }} className="text-[#708090]">
+            <Text
+              style={{ fontSize: ms(15), marginTop: vs(5) }}
+              className="text-[#708090]"
+            >
               {/* date today */}
               Today, {new Date().toLocaleDateString("en-US")}
             </Text>
           </View>
         </View>
-        <View style={{ marginLeft: hs(10), marginRight: hs(10) }}>
+        <View
+          style={{ marginLeft: hs(10), marginRight: hs(10), marginTop: vs(10) }}
+        >
           <CustomButton
             size="$4"
-            color="#fff"
+            c
+            style={{
+              marginLeft: hs(10),
+              marginRight: hs(10),
+              marginTop: vs(10),
+            }}
+            olor="#fff"
             onPress={() => router.push("loan/getLoan")}
           >
             Apply For Loan

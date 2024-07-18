@@ -5,10 +5,10 @@
     "slug": "saving",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/ada.png",
+    "icon": "./assets/ada1.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/screen.png",
       "resizeMode": "cover"
     },
     "assetBundlePatterns": ["**/*"],
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/ada1.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.isiagi.Agalyawamm"
