@@ -15,6 +15,7 @@ export const AuthContext = createContext({
 const AuthContextProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authId, setAuthId] = useState(null);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const AuthContextProvider = ({ children }) => {
       if (token) {
         setAuthToken(token);
         setAuthId(id);
+        setIsAuthenticated(true);
         setIsLoading(false);
       }
       setIsLoading(false);
@@ -36,28 +38,32 @@ const AuthContextProvider = ({ children }) => {
   async function authenticate(token, id) {
     await AsyncStorage.setItem("authToken", token);
     await AsyncStorage.setItem("authId", `${id}`);
+
     setAuthToken(token);
     setAuthId(id);
+    setIsAuthenticated(true);
   }
 
   async function logout() {
     try {
       setIsLoading(true);
       await API.post("auth/logout");
-      setIsLoading(false);
-      AsyncStorage.removeItem("authToken");
+      await AsyncStorage.removeItem("authToken");
+      await AsyncStorage.removeItem("authId");
+      setIsAuthenticated(false);
       setAuthToken(null);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      AsyncStorage.removeItem("authToken");
+      await AsyncStorage.removeItem("authToken");
       setAuthToken(null);
     }
   }
 
   const value = {
     token: authToken,
-    isAuthenticated: !!authToken,
+    isAuthenticated,
     authenticate,
     logout,
     authId,

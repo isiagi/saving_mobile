@@ -5,6 +5,8 @@ import API from "../../utils/api/base";
 import { router } from "expo-router";
 import { Button, Form, Spinner, styled } from "tamagui";
 import { verticalScale } from "../../components/ui/Metrics";
+import { Image } from "react-native";
+import { verticalScale as vs } from "../../components/ui/Metrics";
 
 const CustomButton = styled(Button, {
   backgroundColor: "#589E23", // Change this to your desired color
@@ -35,6 +37,12 @@ const OtpScreen = ({ membership_id }) => {
 
   return (
     <View className="flex-1 justify-center items-center bg-white px-5">
+      <View className="text-center mx-auto" style={{ marginBottom: vs(25) }}>
+        <Image
+          source={require("../../../assets/ada1.png")}
+          style={{ width: 150, height: 150 }}
+        />
+      </View>
       <OtpTextInput otp={otp} setOtp={setOtp} digits={5} />
       {/* <Pressable onPress={handlePress}>
         <Text className="bg-blue-500 mt-10 p-4 text-white">Submit</Text>

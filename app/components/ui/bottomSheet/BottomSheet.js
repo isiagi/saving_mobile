@@ -165,7 +165,7 @@ const Bottom = ({ data, isLoading }) => {
                       >
                         <Text
                           style={{ fontSize: ms(15) }}
-                          className="text-[#000]"
+                          className="text-slate-700"
                         >
                           {key.replace(/_/g, " ")}:
                         </Text>

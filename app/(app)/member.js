@@ -3,7 +3,7 @@ import React from "react";
 import MembershipForm from "../screens/member/MemberForm";
 
 const member = () => {
-  return <MembershipForm />;
+  return <MembershipForm title={"Register"} routeName={"register"} />;
 };
 
 export default member;

@@ -1,9 +1,13 @@
 import { Stack } from "expo-router";
 import { Drawer } from "expo-router/drawer";
+import { useContext } from "react";
 import { Pressable, Text } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { AuthContext } from "../../../store/ctx";
 
 export default function Layout() {
+  const authCtx = useContext(AuthContext);
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
@@ -20,8 +24,8 @@ export default function Layout() {
             headerTitleAlign: "center",
             headerTintColor: "#0F0F0F",
             headerRight: () => (
-              <Pressable>
-                <Text className="text-[#589E23] font-bold mr-5">Log Out</Text>
+              <Pressable onPress={() => authCtx.logout()}>
+                <Text className="text-red-400 font-bold mr-5">Log Out</Text>
               </Pressable>
             ),
             drawerLabel: "Saving",

@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable, Image } from "react-native";
 import React, { useContext, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../store/ctx";
@@ -11,6 +11,7 @@ import {
   horizontalScale as hs,
   moderateScale as ms,
 } from "../../components/ui/Metrics";
+import { ScrollView } from "react-native";
 
 const CustomButton = styled(Button, {
   backgroundColor: "#589E23", // Change this to your desired color
@@ -67,20 +68,28 @@ const CreatePassword = ({ membership_id }) => {
   };
 
   return (
-    <View className="flex-1 px-5 bg-white">
+    <ScrollView className="flex-1 px-5 bg-white">
       <SafeAreaView />
       <View style={{ marginTop: vs(30) }}>
-        <Text style={{ fontSize: ms(20) }}>To Get</Text>
+        <Text style={{ fontSize: ms(25) }} className="text-yellow-300">
+          To Finish Up,
+        </Text>
         <Text
-          style={{ fontSize: ms(30), paddingTop: vs(5) }}
-          className=" font-semibold text-[#589E23]"
+          style={{ fontSize: ms(30), paddingTop: vs(10) }}
+          className="font-semibold text-[#589E23]"
         >
-          Started
+          Create ****
         </Text>
       </View>
-      <View className="flex-1 justify-center">
+      <View style={{ marginTop: vs(60) }} className="flex-1 justify-center">
+        <View className="text-center mx-auto">
+          <Image
+            source={require("../../../assets/ada1.png")}
+            style={{ width: 150, height: 150 }}
+          />
+        </View>
         <Text
-          style={{ fontSize: ms(20), marginTop: vs(30), marginBottom: vs(20) }}
+          style={{ fontSize: ms(20), marginTop: vs(20), marginBottom: vs(20) }}
           className="text-center font-semibold my-4 text-slate-800"
         >
           Set Password
@@ -192,7 +201,7 @@ const CreatePassword = ({ membership_id }) => {
           Set Password
         </Text>
       </TouchableOpacity> */}
-    </View>
+    </ScrollView>
   );
 };
 

@@ -22,7 +22,7 @@ export default function Layout() {
                 onPress={() => router.push("/(app)/(tabs)/loan/getLoan")}
                 className="pr-5"
               >
-                <Text className="text-[#589E23] font-bold">GET LOAN</Text>
+                <Text className="text-yellow-400 font-bold">GET LOAN</Text>
               </TouchableHighlight>
             ),
             drawerLabel: "Loans",

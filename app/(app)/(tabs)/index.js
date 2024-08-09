@@ -11,6 +11,7 @@ import {
   Pressable,
   Alert,
   StatusBar,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HomeModal from "../../components/ui/homeModal/HomeModal";
@@ -26,6 +27,7 @@ import {
   moderateScale as ms,
 } from "../../components/ui/Metrics";
 import { Button, styled } from "tamagui";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DATA = [
   {
@@ -136,7 +138,7 @@ export default function Page() {
 
   const image_url = data[0] && data[0].image_url;
   return (
-    <View className="flex-1">
+    <ScrollView className="flex-1">
       {/* heading */}
       <SafeAreaView>
         <StatusBar barStyle={"dark-content"} />
@@ -153,7 +155,9 @@ export default function Page() {
             >
               <View>
                 <View className="flex-row items-center justify-center gap-1">
-                  <Text style={{ fontSize: ms(25) }}>Hello</Text>
+                  <Text style={{ fontSize: ms(25) }} className="text-slate-700">
+                    Hello
+                  </Text>
                   <Text
                     style={{ fontSize: ms(25) }}
                     className=" font-bold  text-[#589E23]"
@@ -205,7 +209,7 @@ export default function Page() {
               </Text>
             </View>
             <View>
-              <FontAwesome size={30} name="money" color={"#589E23"} />
+              <FontAwesome size={40} name="money" color={"#fde047"} />
             </View>
           </View>
         </View>
@@ -215,16 +219,18 @@ export default function Page() {
         <View className="flex-row justify-between items-center mb-2">
           <Text
             style={{ paddingBottom: vs(10), fontSize: ms(20) }}
-            className=" font-medium text-[#0F0F0F]"
+            className=" font-medium text-slate-700"
           >
             Last Month Saving
           </Text>
-          <Text
-            style={{ paddingBottom: vs(10), fontSize: ms(15) }}
-            className=" text-[#589E23] font-medium"
-          >
-            View Savings
-          </Text>
+          <Pressable onPress={() => router.push("/(app)/(tabs)/saving")}>
+            <Text
+              style={{ paddingBottom: vs(10), fontSize: ms(15) }}
+              className=" text-yellow-400 underline"
+            >
+              View Savings
+            </Text>
+          </Pressable>
         </View>
         <Chart chartData={chartData} />
       </View>
@@ -263,9 +269,9 @@ export default function Page() {
           style={{ gap: ms(15), marginLeft: hs(20), marginRight: hs(20) }}
           className="flex-row  items-center "
         >
-          <FontAwesome size={30} name="money" color={"#589E23"} />
+          <FontAwesome size={50} name="money" color={"#fde047"} />
           <View>
-            <Text style={{ fontSize: ms(20) }} className=" text-[#0F0F0F]">
+            <Text style={{ fontSize: ms(20) }} className=" text-slate-700">
               Get A Loan
             </Text>
             <Text
@@ -308,6 +314,6 @@ export default function Page() {
           keyExtractor={(item) => item.id}
         />
       </View> */}
-    </View>
+    </ScrollView>
   );
 }

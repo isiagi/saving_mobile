@@ -1,11 +1,19 @@
-import { View, Text, TextInput, Pressable, Alert, Image } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Alert,
+  Image,
+  ScrollView,
+} from "react-native";
 import React, { useContext, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../store/ctx";
 import { router } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import login from "../../utils/api_routes/auth/login";
-import { Button, Form, Spinner, styled, Input, YStack } from "tamagui";
+import { Button, Form, Spinner, styled, Input, YStack, XStack } from "tamagui";
 import {
   verticalScale as vs,
   moderateScale as ms,
@@ -15,6 +23,7 @@ const CustomButton = styled(Button, {
   backgroundColor: "#589E23", // Change this to your desired color
   borderRadius: 8,
   padding: 12,
+  marginTop: 10,
 });
 
 const Login = () => {
@@ -38,16 +47,19 @@ const Login = () => {
       Password: password,
     };
 
-    console.log(loginData);
+    // console.log(loginData);
     try {
       setStatus("submitting");
       const response = await login(loginData);
 
       console.log(response.data.Token);
-      authCtx.authenticate(response.data.Token, response.data.User.id);
+      await authCtx.authenticate(response.data.Token, response.data.User.id);
+      setTimeout(() => {
+        router.replace("/(app)/(tabs)/");
+      }, 100);
+      console.log("Navigating...");
       setPassword("");
       setText("");
-      router.navigate("/(app)/");
     } catch (error) {
       console.log(error.message);
       Alert.alert(
@@ -62,7 +74,7 @@ const Login = () => {
   };
 
   return (
-    <View className="flex-1 px-5 bg-white">
+    <ScrollView className="flex-1 px-5 bg-white">
       <SafeAreaView />
       <View style={{ marginTop: vs(50) }}>
         <Text style={{ fontSize: ms(25) }} className="text-yellow-300">
@@ -84,7 +96,7 @@ const Login = () => {
         </View>
         <View style={{ marginTop: vs(20) }}>
           <Text
-            style={{ fontSize: ms(20), paddingBottom: vs(10) }}
+            style={{ fontSize: ms(20), paddingBottom: vs(20) }}
             className="text-center font-semibold text-slate-800"
           >
             Login
@@ -119,12 +131,23 @@ const Login = () => {
                 placeholder={"Password"}
                 color="#589E23"
               />
-              <Pressable
-                style={{ marginBottom: vs(10) }}
-                onPress={() => router.navigate("/(app)/member")}
-              >
-                <Text className="text-[#589E23]">Or Register</Text>
-              </Pressable>
+              <XStack justifyContent="space-between">
+                <Pressable
+                  style={{ marginBottom: vs(10) }}
+                  onPress={() => router.navigate("/(app)/member")}
+                >
+                  <Text className="text-[#589E23] text-lg">Or Register</Text>
+                </Pressable>
+
+                <Pressable
+                  style={{ marginBottom: vs(10) }}
+                  onPress={() => router.navigate("/(app)/forgot-password")}
+                >
+                  <Text className="text-[#589E23] text-lg">
+                    Forgot Password
+                  </Text>
+                </Pressable>
+              </XStack>
             </YStack>
             {/* <View className="mt-8">
             <TextInput
@@ -174,7 +197,7 @@ const Login = () => {
         title="Login"
         style={{ padding: "300px" }}
       /> */}
-    </View>
+    </ScrollView>
   );
 };
 

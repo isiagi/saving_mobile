@@ -25,7 +25,7 @@ import {
 } from "../../components/ui/Metrics";
 
 const CustomButton = styled(Button, {
-  backgroundColor: "#589E23", // Change this to your desired color
+  backgroundColor: "#f87171", // Change this to your desired color
   borderRadius: 8,
   padding: 12,
 });
@@ -72,13 +72,8 @@ const Page = () => {
               Edit Profile
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity className="mr-5">
-            <Text
-              style={{ fontSize: ms(15) }}
-              className="text-[#589E23]  font-medium"
-            >
-              LogOut
-            </Text>
+          <TouchableOpacity className="mr-5" onPress={() => authCtx.logout()}>
+            <FontAwesome size={35} name="sign-out" color={"#f87171"} />
           </TouchableOpacity>
         </View>
         <View
@@ -94,7 +89,7 @@ const Page = () => {
             />
             <Text
               style={{ fontSize: ms(25), paddingTop: vs(10) }}
-              className="text-[#0F0F0F]"
+              className="text-slate-700"
             >
               {data[0] && data[0].user.last_name}
             </Text>
@@ -116,7 +111,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F] font-semibold"
+                className="text-slate-700 font-semibold"
               >
                 Membership No. :{" "}
               </Text>
@@ -134,7 +129,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F] font-semibold"
+                className="text-slate-700 font-semibold"
               >
                 First Name :{" "}
               </Text>
@@ -149,7 +144,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F]  font-semibold"
+                className="text-slate-700  font-semibold"
               >
                 Last Name :{" "}
               </Text>
@@ -164,7 +159,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F]  font-semibold"
+                className="text-slate-700  font-semibold"
               >
                 NIN:{" "}
               </Text>
@@ -179,7 +174,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F]  font-semibold"
+                className="text-slate-700  font-semibold"
               >
                 Email:{" "}
               </Text>
@@ -194,7 +189,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F]  font-semibold"
+                className="text-slate-700  font-semibold"
               >
                 Place of Residence:{" "}
               </Text>
@@ -209,7 +204,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F]  font-semibold"
+                className="text-slate-700  font-semibold"
               >
                 Occupation:{" "}
               </Text>
@@ -224,7 +219,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F]  font-semibold"
+                className="text-slate-700  font-semibold"
               >
                 Gender:{" "}
               </Text>
@@ -239,7 +234,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#0F0F0F]  font-semibold"
+                className="text-slate-700  font-semibold"
               >
                 Phone:{" "}
               </Text>

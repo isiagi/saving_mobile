@@ -165,7 +165,7 @@ const Page = () => {
         >
           <Text
             style={{ fontSize: ms(20) }}
-            className=" font-medium text-[#0F0F0F]"
+            className=" font-medium text-slate-700"
           >
             Edit Profile
           </Text>
@@ -176,7 +176,7 @@ const Page = () => {
             >
               <Text
                 style={{ fontSize: ms(15) }}
-                className="text-[#589E23] font-bold"
+                className="text-red-400 font-bold"
               >
                 Cancel
               </Text>

@@ -1,4 +1,12 @@
-import { View, Text, TextInput, Pressable, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Alert,
+  Image,
+  ScrollView,
+} from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthContext } from "../../store/ctx";
@@ -18,9 +26,10 @@ const CustomButton = styled(Button, {
   backgroundColor: "#589E23", // Change this to your desired color
   borderRadius: 8,
   padding: 12,
+  marginTop: 10,
 });
 
-const MembershipForm = () => {
+const MembershipForm = ({ title, routeName }) => {
   const [text, setText] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -34,7 +43,7 @@ const MembershipForm = () => {
   const handleMember = async () => {
     try {
       setIsLoading(true);
-      const response = await membership({ membership_id: text });
+      const response = await membership({ membership_id: text, routeName });
 
       router.push({
         pathname: "/(app)/otp",
@@ -88,22 +97,34 @@ const MembershipForm = () => {
   };
 
   return (
-    <View className="flex-1 px-5 bg-white">
+    <ScrollView className="flex-1 px-5 bg-white">
       <SafeAreaView />
       <View>
-        <Text style={{ fontSize: ms(20) }}>To Get</Text>
+        <Text style={{ fontSize: ms(25) }} className="text-yellow-300">
+          To {title},
+        </Text>
         <Text
-          style={{ fontSize: ms(30), paddingTop: vs(5) }}
-          className="text-5xl font-semibold"
+          style={{ fontSize: ms(30), paddingTop: vs(10) }}
+          className="font-semibold text-[#589E23]"
         >
-          Started
+          Submit
         </Text>
       </View>
 
-      <View className="flex-1 justify-center">
+      <View style={{ marginTop: vs(60) }} className="flex-1">
+        <View className="text-center mx-auto">
+          <Image
+            source={require("../../../assets/ada1.png")}
+            style={{ width: 150, height: 150 }}
+          />
+        </View>
         <Text
-          style={{ fontSize: ms(22), paddingBottom: vs(15) }}
-          className="text-center  font-semibold text-[#0D68D1]"
+          style={{
+            fontSize: ms(22),
+            paddingBottom: vs(20),
+            paddingTop: vs(20),
+          }}
+          className="text-center  font-semibold text-slate-800"
         >
           Membership ID
         </Text>
@@ -159,7 +180,7 @@ const MembershipForm = () => {
           Submit Membership Id
         </Text>
       </TouchableOpacity> */}
-    </View>
+    </ScrollView>
   );
 };
 

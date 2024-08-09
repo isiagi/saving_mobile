@@ -62,7 +62,7 @@ const Page = ({ title, data, isLoading }) => {
         >
           <Text
             style={{ fontSize: ms(25) }}
-            className="text-[#0F0F0F]  text-center"
+            className="text-slate-700  text-center"
           >
             Your {title}
           </Text>
@@ -111,7 +111,7 @@ const Page = ({ title, data, isLoading }) => {
         className=" flex-row justify-between items-center bg-white rounded-tr-[30px] rounded-tl-[30px]"
       >
         <View>
-          <Text style={{ fontSize: ms(20) }} className=" text-[#0F0F0F]">
+          <Text style={{ fontSize: ms(20) }} className=" text-slate-700">
             Previous {title}
           </Text>
           <Text
@@ -137,7 +137,10 @@ const Page = ({ title, data, isLoading }) => {
               { padding: 6, borderRadius: 4 },
             ]}
           >
-            <Text style={{ fontSize: ms(15) }} className="text-[#589E23] ">
+            <Text
+              style={{ fontSize: ms(15) }}
+              className="text-yellow-400 underline "
+            >
               View All
             </Text>
           </Pressable>
