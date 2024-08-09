@@ -5,7 +5,7 @@ import { router, useLocalSearchParams } from "expo-router";
 
 const setPassword = () => {
   const { membership_id } = useLocalSearchParams();
-  console.log("params", membership_id);
+  // console.log("params", membership_id);
   return (
     <React.Suspense fallback={<Text>Loading...</Text>}>
       <CreatePassword membership_id={membership_id} />

@@ -56,7 +56,7 @@ const Page = () => {
 
   const { authId } = useContext(AuthContext);
 
-  console.log("auth", authId);
+  // console.log("auth", authId);
 
   const [data, isLoading] = useGetById("user_profile/profile", authId);
   const { userData, isDataLoading } = useContext(DataContext);
@@ -92,7 +92,7 @@ const Page = () => {
     }
   }, [userData]);
 
-  console.log("userData", userData[0]);
+  // console.log("userData", userData[0]);
 
   if (isDataLoading) {
     return <Text>Loading...</Text>;
@@ -106,7 +106,7 @@ const Page = () => {
       quality: 1,
     });
 
-    console.log(result.assets[0]);
+    // console.log(result.assets[0]);
 
     if (!result.canceled) {
       setFormState((prevState) => ({

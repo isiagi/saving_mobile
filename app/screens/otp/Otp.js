@@ -1,12 +1,15 @@
 import OtpTextInput from "react-native-text-input-otp";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Alert } from "react-native";
 import React from "react";
 import API from "../../utils/api/base";
 import { router } from "expo-router";
 import { Button, Form, Spinner, styled } from "tamagui";
 import { verticalScale } from "../../components/ui/Metrics";
 import { Image } from "react-native";
-import { verticalScale as vs } from "../../components/ui/Metrics";
+import {
+  verticalScale as vs,
+  moderateScale as ms,
+} from "../../components/ui/Metrics";
 
 const CustomButton = styled(Button, {
   backgroundColor: "#589E23", // Change this to your desired color
@@ -18,18 +21,22 @@ const OtpScreen = ({ membership_id }) => {
   const [otp, setOtp] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  console.log(otp);
+  // console.log(otp);
   const handlePress = async () => {
     try {
       setLoading(true);
       const res = await API.post("auth/validate_otp/", { membership_id, otp });
-      console.log(res);
+      // console.log(res);
       router.replace({
         pathname: "/(app)/set-password",
         params: { membership_id },
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      Alert.alert(
+        "Validation Error",
+        "please try again later or contact admin"
+      );
     } finally {
       setLoading(false);
     }
@@ -37,6 +44,12 @@ const OtpScreen = ({ membership_id }) => {
 
   return (
     <View className="flex-1 justify-center items-center bg-white px-5">
+      <Text
+        style={{ marginBottom: vs(25), fontSize: ms(20) }}
+        className=" font-bold "
+      >
+        Enter OTP sent to your email
+      </Text>
       <View className="text-center mx-auto" style={{ marginBottom: vs(25) }}>
         <Image
           source={require("../../../assets/ada1.png")}

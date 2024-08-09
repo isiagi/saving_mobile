@@ -52,16 +52,16 @@ const Login = () => {
       setStatus("submitting");
       const response = await login(loginData);
 
-      console.log(response.data.Token);
+      // console.log(response.data.Token);
       await authCtx.authenticate(response.data.Token, response.data.User.id);
       setTimeout(() => {
         router.replace("/(app)/(tabs)/");
       }, 100);
-      console.log("Navigating...");
+      // console.log("Navigating...");
       setPassword("");
       setText("");
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       Alert.alert(
         "Authentication Error",
         "Please check credentials Or Contact Admin"
@@ -131,12 +131,14 @@ const Login = () => {
                 placeholder={"Password"}
                 color="#589E23"
               />
-              <XStack justifyContent="space-between">
+              <XStack justifyContent="space-between" paddingVertical="$1">
                 <Pressable
                   style={{ marginBottom: vs(10) }}
                   onPress={() => router.navigate("/(app)/member")}
                 >
-                  <Text className="text-[#589E23] text-lg">Or Register</Text>
+                  <Text className="text-[#589E23] text-lg">
+                    Create Password
+                  </Text>
                 </Pressable>
 
                 <Pressable

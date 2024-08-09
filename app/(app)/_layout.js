@@ -19,7 +19,15 @@ export default function AppLayout() {
       <Stack.Screen name="set-password" options={{ headerShown: false }} />
       <Stack.Screen
         name="otp"
-        options={{ headerTitle: "Enter OTP", headerTitleAlign: "center" }}
+        options={{
+          headerTitle: "Enter OTP",
+          headerTitleAlign: "center",
+        }}
+      />
+
+      <Stack.Screen
+        name="forgot-password"
+        options={{ headerTitle: "Forgot Password", headerTitleAlign: "center" }}
       />
     </Stack>
   );

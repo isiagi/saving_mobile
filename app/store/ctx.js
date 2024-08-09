@@ -22,7 +22,7 @@ const AuthContextProvider = ({ children }) => {
     const fetchToken = async () => {
       const token = await AsyncStorage.getItem("authToken");
       const id = await AsyncStorage.getItem("authId");
-      console.log("Fetched token from AsyncStorage:", token);
+      // console.log("Fetched token from AsyncStorage:", token);
       if (token) {
         setAuthToken(token);
         setAuthId(id);

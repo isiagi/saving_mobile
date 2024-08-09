@@ -38,8 +38,8 @@ const Chart = ({ chartData }) => {
     setLabel(newLabels);
 
     // Debugging logs
-    console.log("Processed data:", newData);
-    console.log("Processed labels:", newLabels);
+    // console.log("Processed data:", newData);
+    // console.log("Processed labels:", newLabels);
   }, [chartData]);
 
   const data = {

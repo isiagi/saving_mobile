@@ -117,7 +117,7 @@ export default function Page() {
 
   const chartData = dataz[dataz.length - 1];
 
-  console.log(chartData, "chart data");
+  // console.log(chartData, "chart data");
 
   const data = dataz[0];
   // raiseData(data);
@@ -129,7 +129,7 @@ export default function Page() {
     savingTotal &&
     savingTotal.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);
 
-  console.log(savings, "savings");
+  // console.log(savings, "savings");
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",

@@ -51,20 +51,20 @@ const MembershipForm = ({ title, routeName }) => {
       });
 
       // setText("");
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // The error is an Axios error
-        console.error("Axios error:", error);
-        console.error("Error message:", error.message);
-        console.error("Error code:", error.code);
-        console.error("Error config:", error.config);
+        // console.error("Axios error:", error);
+        // console.error("Error message:", error.message);
+        // console.error("Error code:", error.code);
+        // console.error("Error config:", error.config);
         if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
-          console.error("Response data:", error.response.data);
-          console.error("Response status:", error.response.status);
-          console.error("Response headers:", error.response.headers);
+          // console.error("Response data:", error.response.data);
+          // console.error("Response status:", error.response.status);
+          // console.error("Response headers:", error.response.headers);
 
           // Show an alert
           Alert.alert(
@@ -73,7 +73,7 @@ const MembershipForm = ({ title, routeName }) => {
           );
         } else if (error.request) {
           // The request was made but no response was received
-          console.error("Request data:", error.request);
+          // console.error("Request data:", error.request);
 
           // Show an alert for request error
           Alert.alert(
@@ -83,7 +83,7 @@ const MembershipForm = ({ title, routeName }) => {
         }
       } else {
         // The error is not an Axios error
-        console.error("Error:", error);
+        // console.error("Error:", error);
 
         // Show a generic alert for other errors
         Alert.alert(

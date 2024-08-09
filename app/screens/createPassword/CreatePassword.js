@@ -12,6 +12,7 @@ import {
   moderateScale as ms,
 } from "../../components/ui/Metrics";
 import { ScrollView } from "react-native";
+import { Alert } from "react-native";
 
 const CustomButton = styled(Button, {
   backgroundColor: "#589E23", // Change this to your desired color
@@ -56,12 +57,13 @@ const CreatePassword = ({ membership_id }) => {
         membership: membership_id,
         password: password.password,
       });
-      console.log(response.data);
+      // console.log(response.data);
       // authCtx.authenticate(response.data.Token);
       router.push("/(app)/sign-in");
       setPassword({ password: "", confirmPassword: "" });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      Alert.alert("Creation Error", "please try again later or contact admin");
     } finally {
       setLoading(false);
     }
