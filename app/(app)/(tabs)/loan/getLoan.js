@@ -1,5 +1,5 @@
 import { ToastAndroid, ScrollView } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, YStack, Label, Input, Button, styled, Spinner } from "tamagui";
 import { send } from "@emailjs/react-native";
 import {
@@ -9,6 +9,8 @@ import {
 } from "../../../components/ui/Metrics";
 import { router } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
+import { AuthContext } from "../../../store/ctx";
+import useGetById from "../../../hooks/useGetById";
 
 // form config fields > membership_id, amount, duration, guarantor, nin, phone, email, occupation, residence, gender
 
@@ -96,6 +98,17 @@ const Page = () => {
     residence: "",
     gender: "",
   });
+  const [userData, setUserData] = useState(null);
+
+  const { authId } = useContext(AuthContext);
+  const [data, isLoading] = useGetById("user_profile/profile", authId);
+
+  useEffect(() => {
+    setUserData(data);
+  }, [data]);
+
+  // console.log(userData, "dataUser");
+
   const [loading, setLoading] = React.useState(false);
   const handleChange = (name, value) => {
     setFormState({
@@ -113,6 +126,20 @@ const Page = () => {
 
     if (!allFieldsFilled) {
       ToastAndroid.show("Please fill all fields before submitting", 5000);
+      return;
+    }
+
+    // Check if NIN and Email match the ones from userData
+    if (
+      userData &&
+      (formState.nin !== userData[0]?.nin ||
+        formState.email !== userData[0]?.user.email ||
+        formState.membership_id !== userData[0]?.user.username)
+    ) {
+      ToastAndroid.show(
+        "NIN, Email, or Membership ID does not match your profile. Please check and try again.",
+        5000
+      );
       return;
     }
 
