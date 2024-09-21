@@ -8,6 +8,7 @@ import {
   horizontalScale as hs,
 } from "../../../components/ui/Metrics";
 import { router } from "expo-router";
+import { Picker } from "@react-native-picker/picker";
 
 // form config fields > membership_id, amount, duration, guarantor, nin, phone, email, occupation, residence, gender
 
@@ -62,10 +63,16 @@ const formConfig = [
     label: "Residence",
     placeholder: "Residence",
   },
+
   {
     name: "gender",
     label: "Gender",
     placeholder: "Gender",
+    type: "picker", // Add type to indicate it's a dropdown
+    options: [
+      { label: "Male", value: "male" },
+      { label: "Female", value: "female" },
+    ],
   },
 ];
 
@@ -99,6 +106,16 @@ const Page = () => {
   //   submit
 
   const handelSubmit = async () => {
+    // Check if all fields are filled
+    const allFieldsFilled = Object.values(formState).every(
+      (field) => field.trim() !== ""
+    );
+
+    if (!allFieldsFilled) {
+      ToastAndroid.show("Please fill all fields before submitting", 5000);
+      return;
+    }
+
     try {
       setLoading(true);
       await send("service_znx9z77", "template_of7jajp", formState, {
@@ -135,18 +152,40 @@ const Page = () => {
               {formConfig.map((field, i) => (
                 <React.Fragment key={i}>
                   <Label color="#0F0F0F" htmlFor={field.name}>
-                    {field.label}
+                    {field.label} *
                   </Label>
-                  <Input
-                    backgroundColor="#fff"
-                    padding="$1"
-                    size={"$4"}
-                    onChangeText={(text) => handleChange(field.name, text)}
-                    value={formState[field.name]}
-                    placeholder={field.placeholder}
-                    color="#589E23"
-                    id={field.name}
-                  />
+                  {field.type === "picker" ? (
+                    <Picker
+                      selectedValue={formState.gender}
+                      onValueChange={(itemValue) =>
+                        handleChange(field.name, itemValue)
+                      }
+                      style={{
+                        backgroundColor: "#fff",
+                        color: "#589E23",
+                        paddingVertical: 10,
+                      }}
+                    >
+                      {field.options.map((option) => (
+                        <Picker.Item
+                          key={option.value}
+                          label={option.label}
+                          value={option.value}
+                        />
+                      ))}
+                    </Picker>
+                  ) : (
+                    <Input
+                      backgroundColor="#fff"
+                      padding="$1"
+                      size={"$4"}
+                      onChangeText={(text) => handleChange(field.name, text)}
+                      value={formState[field.name]}
+                      placeholder={field.placeholder}
+                      color="#589E23"
+                      id={field.name}
+                    />
+                  )}
                 </React.Fragment>
               ))}
             </YStack>
