@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useEffect, useState } from "react";
 import API from "../utils/api/authBase";
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Text, View } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 
 export const AuthContext = createContext({
@@ -46,13 +46,41 @@ const AuthContextProvider = ({ children }) => {
 
   async function logout() {
     try {
-      setIsLoading(true);
-      await API.post("auth/logout");
-      await AsyncStorage.removeItem("authToken");
-      await AsyncStorage.removeItem("authId");
-      setIsAuthenticated(false);
-      setAuthToken(null);
-      setIsLoading(false);
+      // setIsLoading(true);
+      Alert.alert(
+        "Log Out Account",
+        "Are sure you want to Log out",
+        [
+          {
+            text: "Log Out",
+            onPress: async () => {
+              setIsLoading(true);
+              await API.post("auth/logout");
+              await AsyncStorage.removeItem("authToken");
+              await AsyncStorage.removeItem("authId");
+              setIsAuthenticated(false);
+              setAuthToken(null);
+              setIsLoading(false);
+            },
+            style: "default",
+          },
+          {
+            text: "Cancel",
+            onPress: () => Alert.alert("Logout Cancelled"),
+            style: "cancel",
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () => Alert.alert("Log Out Cancelled"),
+        }
+      );
+      // await API.post("auth/logout");
+      // await AsyncStorage.removeItem("authToken");
+      // await AsyncStorage.removeItem("authId");
+      // setIsAuthenticated(false);
+      // setAuthToken(null);
+      // setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);

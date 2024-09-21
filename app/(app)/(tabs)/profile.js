@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Alert,
   Image,
   Pressable,
   ScrollView,
@@ -17,12 +18,13 @@ import { router } from "expo-router";
 import useGetById from "../../hooks/useGetById";
 import { DataContext } from "../../store/dataCtx";
 import Spinner from "react-native-loading-spinner-overlay";
-import { Form, styled, Button } from "tamagui";
+import { Form, styled, Button, AlertDialog, YStack, XStack } from "tamagui";
 import {
   verticalScale as vs,
   horizontalScale as hs,
   moderateScale as ms,
 } from "../../components/ui/Metrics";
+import BASEAPI from "../../utils/api/authBase";
 
 const CustomButton = styled(Button, {
   backgroundColor: "#f87171", // Change this to your desired color
@@ -46,6 +48,32 @@ const Page = () => {
   //   );
 
   const image_url = data[0] && data[0].image_url;
+
+  const handleAccountDelete = async () => {
+    Alert.alert(
+      "Delete Account",
+      "Are sure to delete your account!",
+      [
+        {
+          text: "Delete",
+          onPress: async () => {
+            await BASEAPI.delete(`auth/delete_password/`);
+            authCtx.logout();
+          },
+          style: "default",
+        },
+        {
+          text: "Cancel",
+          onPress: () => Alert.alert("Account not deleted"),
+          style: "cancel",
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => Alert.alert("Account not deleted"),
+      }
+    );
+  };
 
   return (
     <ScrollView className="flex-1">
@@ -229,7 +257,7 @@ const Page = () => {
             </View>
 
             <View
-              style={{ paddingTop: vs(10), paddingBottom: vs(10) }}
+              style={{ paddingTop: vs(10), paddingBottom: vs(20) }}
               className="flex-row justify-between"
             >
               <Text
@@ -250,6 +278,19 @@ const Page = () => {
                   icon={authCtx.isLoading ? () => <Spinner /> : undefined}
                 >
                   Log Out
+                </CustomButton>
+              </Form.Trigger>
+            </Form>
+
+            <Text className="text-xl font-bold my-10">Advanced Settings</Text>
+
+            <Form onSubmit={handleAccountDelete}>
+              <Form.Trigger asChild>
+                <CustomButton
+                  size="$5"
+                  icon={authCtx.isLoading ? () => <Spinner /> : undefined}
+                >
+                  Delete Account
                 </CustomButton>
               </Form.Trigger>
             </Form>

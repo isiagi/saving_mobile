@@ -3,7 +3,7 @@
     "scheme": "Agalyawamm-scheme",
     "name": "Agalyawamm",
     "slug": "saving",
-    "version": "1.0.2",
+    "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/ada1.png",
     "userInterfaceStyle": "light",
@@ -18,12 +18,16 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": [
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/ada1.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.isiagi.Agalyawamm",
-      "versionCode": 3
+      "versionCode": 12
     },
     "web": {
       "favicon": "./assets/favicon.png",

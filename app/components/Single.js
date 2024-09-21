@@ -1,5 +1,5 @@
 import {
-  Button,
+  Platform,
   Pressable,
   StatusBar,
   StyleSheet,
@@ -18,13 +18,28 @@ import {
   horizontalScale as hs,
 } from "./ui/Metrics";
 
+import * as FileSystem from "expo-file-system";
+import { shareAsync } from "expo-sharing";
+import BASEAPI from "../utils/api/authBase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Button, styled } from "tamagui";
+import { Download } from "@tamagui/lucide-icons";
+
+const CustomButton = styled(Button, {
+  backgroundColor: "#facc15", // Change this to your desired color
+});
+
 const Page = ({ title, data, isLoading }) => {
   const [totalAmount, setTotalAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const tabPath = usePathname();
+  console.log(tabPath, "tabPath");
 
   const toRoute =
-    tabPath === "/loan/payment" ? tabPath.split("/")[2] : tabPath.split("/")[1];
+    tabPath === "/loan/payment" || tabPath === "/saving/wagumbulizi"
+      ? tabPath.split("/")[2]
+      : tabPath.split("/")[1];
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -51,6 +66,77 @@ const Page = ({ title, data, isLoading }) => {
   });
 
   console.log(totalAmount, "total amount");
+
+  const downloadFromApi = async () => {
+    console.log("Download started");
+    const filename = `${toRoute}.pdf`;
+
+    // Get auth token from AsyncStorage
+    const token = await AsyncStorage.getItem("authToken");
+
+    // Check if token exists
+    if (!token) {
+      console.error("No auth token found.");
+      return;
+    }
+
+    console.log("Token retrieved:", token);
+
+    const localhost = Platform.OS === "android" ? "10.0.2.2" : "127.0.0.1";
+    setLoading(true);
+    console.log("Loading state set to true");
+
+    try {
+      const result = await FileSystem.downloadAsync(
+        `https://agalyawamm-backend.onrender.com/api/pdfs/${toRoute}/`,
+        FileSystem.documentDirectory + filename,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+      console.log("Download result:", result);
+      save(result.uri, filename, "application/pdf");
+    } catch (error) {
+      console.error("Error during download:", error);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+    console.log("Loading state set to false");
+  };
+
+  const save = async (uri, filename, mimetype) => {
+    if (Platform.OS === "android") {
+      const permissions =
+        await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+      if (permissions.granted) {
+        const base64 = await FileSystem.readAsStringAsync(uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        await FileSystem.StorageAccessFramework.createFileAsync(
+          permissions.directoryUri,
+          filename,
+          mimetype
+        )
+          .then(async (uri) => {
+            await FileSystem.writeAsStringAsync(uri, base64, {
+              encoding: FileSystem.EncodingType.Base64,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        console.log("Permission denied");
+        shareAsync(uri);
+      }
+    } else {
+      await shareAsync(uri);
+    }
+  };
 
   return (
     <View className="flex-1 overflow-hidden">
@@ -98,6 +184,7 @@ const Page = ({ title, data, isLoading }) => {
           </View>
         </View>
       </View>
+      {/* <Button title="Download From API" onPress={downloadFromApi} /> */}
       {/* <SavingInterest /> */}
 
       {/* <Link href="/">Home</Link> */}
@@ -122,7 +209,7 @@ const Page = ({ title, data, isLoading }) => {
           </Text>
         </View>
         <View>
-          <Pressable
+          {/* <Pressable
             onPress={() =>
               router.navigate(
                 `/(tabs)/${
@@ -143,7 +230,19 @@ const Page = ({ title, data, isLoading }) => {
             >
               View All
             </Text>
-          </Pressable>
+          </Pressable> */}
+          <CustomButton
+            iconAfter={Download}
+            size="$4"
+            onPress={downloadFromApi}
+            color={`${loading ? "gray" : "#589E23"}`}
+          >
+            {`${
+              !loading
+                ? `${toRoute.charAt(0).toUpperCase() + toRoute.slice(1)} Pdf`
+                : "Loading..."
+            }`}
+          </CustomButton>
         </View>
       </View>
       <Bottom data={data} isLoading={isLoading} />

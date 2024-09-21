@@ -16,6 +16,7 @@ export default function Layout() {
           drawerActiveTintColor: "#fff",
           drawerInactiveTintColor: "#0F0F0F",
         }}
+        initialRouteName="index"
       >
         <Drawer.Screen
           name="index"
@@ -29,6 +30,7 @@ export default function Layout() {
               </Pressable>
             ),
             drawerLabel: "Saving",
+            unmountOnBlur: true,
           }}
         />
         <Drawer.Screen

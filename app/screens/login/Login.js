@@ -76,15 +76,18 @@ const Login = () => {
   return (
     <ScrollView className="flex-1 px-5 bg-white">
       <SafeAreaView />
-      <View style={{ marginTop: vs(50) }}>
-        <Text style={{ fontSize: ms(25) }} className="text-yellow-300">
+      <View style={{ marginTop: vs(30) }}>
+        <Text
+          style={{ fontSize: ms(25) }}
+          className="text-yellow-300 text-center"
+        >
           Welcome To
         </Text>
         <Text
           style={{ fontSize: ms(30), paddingTop: vs(10) }}
-          className="font-semibold text-[#589E23]"
+          className="font-semibold text-[#589E23] text-center"
         >
-          Agalyawamu App
+          Agalyawamu
         </Text>
       </View>
       <View className="flex-1" style={{ marginTop: vs(60) }}>

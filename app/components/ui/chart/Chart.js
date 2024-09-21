@@ -14,6 +14,21 @@ const Chart = ({ chartData }) => {
       return;
     }
 
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
     const newData = [];
     const newLabels = [];
 
@@ -24,11 +39,18 @@ const Chart = ({ chartData }) => {
       ) {
         newData.push(total_amount);
       } else {
-        console.warn("Invalid count value:", total_amount);
+        console.warn("Invalid total_amount value:", total_amount);
       }
 
-      if (typeof month === "string" || typeof month === "number") {
-        newLabels.push(month);
+      if (typeof month === "number" && month >= 1 && month <= 12) {
+        newLabels.push(monthNames[month - 1]); // Convert month number to month name
+      } else if (typeof month === "string" && !isNaN(parseInt(month, 10))) {
+        const monthNumber = parseInt(month, 10);
+        if (monthNumber >= 1 && monthNumber <= 12) {
+          newLabels.push(monthNames[monthNumber - 1]);
+        } else {
+          console.warn("Invalid month value:", month);
+        }
       } else {
         console.warn("Invalid month value:", month);
       }
@@ -38,8 +60,8 @@ const Chart = ({ chartData }) => {
     setLabel(newLabels);
 
     // Debugging logs
-    // console.log("Processed data:", newData);
-    // console.log("Processed labels:", newLabels);
+    console.log("Processed data:", newData);
+    console.log("Processed labels:", newLabels);
   }, [chartData]);
 
   const data = {
